@@ -1,23 +1,16 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import Route from './routes'
-import * as eva from '@eva-design/eva'
-import {ApplicationProvider,IconRegistry } from '@ui-kitten/components'
-import { EvaIconsPack } from '@ui-kitten/eva-icons'
+import * as React from 'react'
 
+export const isReadyRef= React.createRef();
 
-const App = () => {
-    return (
-        // later we will wrap this route inside redux provider to access the store all over the application
-      <>
-      <IconRegistry icons={EvaIconsPack}/>
-      <ApplicationProvider {...eva} theme={eva.light}>
-      <Route/>
-      </ApplicationProvider>
-      </>
-    )
+export const navigationRef= React.createRef();
+
+export function navigate(name, params){
+    if(isReadyRef.current && navigationRef.current){
+         //Perform navigation if the app has mounted
+        navigationRef.current.navigate(name,params)
+    }else{
+ // You can decide what to do if the app hasn't mounted
+    // You can ignore this, or add these actions to a queue you can call later
+ 
+    }
 }
-
-export default App
-
-const styles = StyleSheet.create({})
