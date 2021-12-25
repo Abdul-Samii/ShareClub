@@ -17,7 +17,6 @@ export default button
 const Styles = StyleSheet.create({
 btn:{
     backgroundColor:COLORS.black,
-    width:wp(60),
     height:50,
     alignItems:"center",
     justifyContent:"center",
