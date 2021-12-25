@@ -1,5 +1,5 @@
 import {Dimensions} from 'react-native';
-import ICONS from './icons'
+//import ICONS from './icons'
 import {IMAGES} from './images'
 import { COLORS ,FONTS,SIZES } from './theme';
 

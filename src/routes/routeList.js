@@ -5,6 +5,6 @@ export const initialRouteName = 'login';  //for sample test right now I set the 
 
 export const RouteList = [
   // {name: 'splash', component: SplashScreen},
-    {name:'signup', component:Signup}
+    {name:'signup', component:Login}
   
 ];

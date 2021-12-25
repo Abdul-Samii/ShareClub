@@ -54,6 +54,12 @@ export const COLORS = {
     // gray8: '#6e6e6e',
     // gray9: '#262626',
 
+    red1:'#e6564e',
+    red2:'#ff8177',
+
+    blue1:'#484af1',
+    blue2:'#160b87',
+
 
     pink1:'#d86eb8',
     pinkShade:'rgba(220,108,187,0.8)',
@@ -113,15 +119,7 @@ export const DARK_THEME = {
 // for dynamic sizes use deviceOrientation width and height
 
 export const SIZES = {
-    // global sizes
-    // base: 8,
-    // font: 14,
-    // radius: 12,
-    // padding: 24,
-    // padding2: 36,
-
-    // font sizes
-    // largeTitle: 50,
+   
     largTitle: 32,
     title: 24,    //experience
     subTitle: 20, //experience
@@ -148,185 +146,8 @@ export const SIZES = {
 };
 
 export const FONTS = {
-    largTitle_r: {
-        fontSize: SIZES.largTitle,
-        fontFamily: 'Roboto-Regular'
-    },
-    largTitle_m: {
-        fontSize: SIZES.largTitle,
-        fontFamily: 'Roboto-Medium'
-    },
-    largTitle_b: {
-        fontSize: SIZES.largTitle,
-        fontFamily: 'Roboto-Bold'
-    },
+    heading : "FuzzyBubbles-Bold"
 
-    title_r: {
-        fontSize: SIZES.title,
-        fontFamily: 'Roboto-Regular'
-    },
-    title_m: {
-        fontSize: SIZES.title,
-        fontFamily: 'Roboto-Medium'
-    },
-    title_b: {
-        fontSize: SIZES.title,
-        fontFamily: 'Roboto-Bold'
-    },
-
-    subTitle_r: {
-        fontSize: SIZES.subTitle,
-        fontFamily: 'Roboto-Regular'
-    },
-    subTitle_m: {
-        fontSize: SIZES.subTitle,
-        fontFamily: 'Roboto-Medium'
-    },
-    subTitle_b: {
-        fontSize: SIZES.subTitle,
-        fontFamily: 'Roboto-Bold'
-    },
-
-    small_r: {
-        fontSize: SIZES.small,
-        fontFamily: 'Roboto-Regular'
-    },
-    small_m: {
-        fontSize: SIZES.small,
-        fontFamily: 'Roboto-Medium'
-    },
-    small_b: {
-        fontSize: SIZES.small,
-        fontFamily: 'Roboto-bold'
-    },
-
-
-    xsmall_r: {
-        fontSize: SIZES.xsmall,
-        fontFamily: 'Roboto-Regular'
-    },
-    xsmall_m: {
-        fontSize: SIZES.xsmall,
-        fontFamily: 'Roboto-Medium'
-    },
-    xsmall_b: {
-        fontSize: SIZES.xsmall,
-        fontFamily: 'Roboto-Medium'
-    },
-
-    h_b: {
-        fontSize: SIZES.h,
-        fontFamily: 'Roboto-Bold'
-    },
-    h1_b: {
-        fontSize: SIZES.h1,
-        fontFamily: 'Roboto-Bold'
-    },
-    h2_b: {
-        fontSize: SIZES.h2,
-        fontFamily: 'Roboto-Bold'
-    },
-    h3_b: {
-        fontSize: SIZES.h3,
-        fontFamily: 'Roboto-Bold'
-    },
-    h4_b: {
-        fontSize: SIZES.h4,
-        fontFamily: 'Roboto-Bold'
-    },
-
-    h_m: {
-        fontSize: SIZES.h,
-        fontFamily: 'Roboto-Medium'
-    },
-    h1_m: {
-        fontSize: SIZES.h1,
-        fontFamily: 'Roboto-Medium'
-    },
-    h2_m: {
-        fontSize: SIZES.h2,
-        fontFamily: 'Roboto-Medium'
-    },
-    h3_m: {
-        fontSize: SIZES.h3,
-        fontFamily: 'Roboto-Medium'
-    },
-    h4_m: {
-        fontSize: SIZES.h4,
-        fontFamily: 'Roboto-Medium'
-    },
-
-    h_r: {
-        fontSize: SIZES.h,
-        fontFamily: 'Roboto-Regular'
-    },
-    h1_r: {
-        fontSize: SIZES.h1,
-        fontFamily: 'Roboto-Regular'
-    },
-    h2_r: {
-        fontSize: SIZES.h2,
-        fontFamily: 'Roboto-Regular'
-    },
-    h3_r: {
-        fontSize: SIZES.h3,
-        fontFamily: 'Roboto-Regular'
-    },
-    h4_r: {
-        fontSize: SIZES.h4,
-        fontFamily: 'Roboto-Regular'
-    },
-
-    body1_b: {
-        fontSize: SIZES.body1,
-        fontFamily: 'Roboto-Bold'
-    },
-    body2_b: {
-        fontSize: SIZES.body2,
-        fontFamily: 'Roboto-Bold'
-    },
-    body3_b: {
-        fontSize: SIZES.body3,
-        fontFamily: 'Roboto-Bold'
-    },
-    body4_b: {
-        fontSize: SIZES.body4,
-        fontFamily: 'Roboto-Bold'
-    },
-
-    body1_m: {
-        fontSize: SIZES.body1,
-        fontFamily: 'Roboto-Medium'
-    },
-    body2_m: {
-        fontSize: SIZES.body2,
-        fontFamily: 'Roboto-Medium'
-    },
-    body3_m: {
-        fontSize: SIZES.body3,
-        fontFamily: 'Roboto-Medium'
-    },
-    body4_m: {
-        fontSize: SIZES.body4,
-        fontFamily: 'Roboto-Medium'
-    },
-
-    body1_r: {
-        fontSize: SIZES.body1,
-        fontFamily: 'Roboto-Regular'
-    },
-    body2_r: {
-        fontSize: SIZES.body2,
-        fontFamily: 'Roboto-Regular'
-    },
-    body3_r: {
-        fontSize: SIZES.body3,
-        fontFamily: 'Roboto-Regular'
-    },
-    body4_r: {
-        fontSize: SIZES.body4,
-        fontFamily: 'Roboto-Regular'
-    },
 
 };
 
