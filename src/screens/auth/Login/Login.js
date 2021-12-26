@@ -3,11 +3,13 @@ import {View, Text, StyleSheet, Image,KeyboardAvoidingView} from 'react-native'
 import { Button } from '../../../components/form'
 import FormInput from '../../../components/form/FormInput'
 import { COLORS, FONTS, hp, ICONS, IMAGES, wp } from '../../../constants'
+import { Header } from '../components'
+import RegisterNow from '../components/RegisterNow'
 
-const Login = () => {
+const Login = ({navigation}) => {
 
-    const [email,setEmail] = useState([])
-    const [password,setPassword] = useState([])
+    const [email,setEmail] = useState()
+    const [password,setPassword] = useState()
     console.log(password)
 
     const handleLogin = () =>{
@@ -19,12 +21,7 @@ const Login = () => {
     return(
         <KeyboardAvoidingView behavior='position'>
 
-            <View style={Styles.header}>
-                <Image 
-                    source={IMAGES.loginHeader}
-                    style={Styles.img}
-                />
-            </View>
+            <Header img={IMAGES.loginHeader}/>
             <View style={Styles.content}>
                 <View style={Styles.heading}>
                     <Text style={Styles.headingTxt}>Welcome back!</Text>
@@ -42,6 +39,7 @@ const Login = () => {
                     placeholder="Password"
                     style={{...Styles.inputField,marginTop:hp(1)}}
                     onChangeText={(item)=>{setPassword(item)}}
+                    value={password}
                     secureTextEntry
                 />
                 <View style={Styles.loginBtnView}>
@@ -51,14 +49,13 @@ const Login = () => {
                     />
                     <Button title="Forgot Password"
                         btnStyle={{...Styles.loginBtn,marginTop:hp(1),backgroundColor:COLORS.red1}}
+                        onPress={()=>{navigation.navigate('forgotpassword')}}
                     />
                 </View>
             </View>
             </View>
 
-            <View style={Styles.footer}>
-                <Text>Dont have an account? Register Now</Text>
-            </View>
+            <RegisterNow nav={()=>navigation.navigate('signup')}/>
 
             <View>
                 <View style={Styles.footerBtns}>
@@ -91,14 +88,7 @@ const Login = () => {
 export default Login
 
 const Styles = StyleSheet.create({
-    header:{
-        height:hp(30),
-    },
-    img:{
-        height:hp(30),
-        width:wp(100),
-        marginLeft:wp(0)
-    },
+    
     heading:{
         marginLeft:wp(32),
     },
@@ -123,10 +113,6 @@ const Styles = StyleSheet.create({
     loginBtn:{
         backgroundColor:COLORS.blue2,
         marginHorizontal:wp(4)
-    },
-    footer:{
-        marginLeft:wp(7),
-        marginTop:hp(2)
     },
     footerBtns:{
         flexDirection:'row',

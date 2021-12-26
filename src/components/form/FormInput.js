@@ -3,7 +3,7 @@ import {View, Text} from 'react-native'
 import {TextInput} from 'react-native-paper'
 import {wp,hp} from '../../constants'
 
-const FormInput = ({mode,value,onChangeText, placeholder,style, ...rest }) =>{
+const FormInput = ({mode,value,onChangeText,keyboardType, placeholder,style, ...rest }) =>{
   return(
     <View>
       <TextInput
@@ -12,6 +12,7 @@ const FormInput = ({mode,value,onChangeText, placeholder,style, ...rest }) =>{
       mode={mode}
       style={style}
       value={value}
+      keyboardType={keyboardType}
       onChangeText={(item)=>onChangeText(item)}
       />
     </View>

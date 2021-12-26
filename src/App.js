@@ -4,6 +4,19 @@ import Route from './routes'
 import * as eva from '@eva-design/eva'
 import {ApplicationProvider,IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper'
+import { COLORS } from './constants'
+
+
+const theme = {
+  ...DefaultTheme,
+  roundness:2,
+  colors:{
+    ...DefaultTheme.colors,
+    primary:COLORS.red2,
+    accent:COLORS.red1
+  }
+}
 
 
 const App = () => {
@@ -12,7 +25,10 @@ const App = () => {
       <>
       <IconRegistry icons={EvaIconsPack}/>
       <ApplicationProvider {...eva} theme={eva.light}>
-      <Route/>
+        <PaperProvider theme={theme}>
+          <Route/>
+        </PaperProvider>
+      
       </ApplicationProvider>
       </>
     )
