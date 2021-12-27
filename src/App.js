@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,StatusBar } from 'react-native'
 import Route from './routes'
 import * as eva from '@eva-design/eva'
 import {ApplicationProvider,IconRegistry } from '@ui-kitten/components'
@@ -26,6 +26,8 @@ const App = () => {
       <IconRegistry icons={EvaIconsPack}/>
       <ApplicationProvider {...eva} theme={eva.light}>
         <PaperProvider theme={theme}>
+        <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+
           <Route/>
         </PaperProvider>
       
