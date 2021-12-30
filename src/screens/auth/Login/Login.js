@@ -13,7 +13,7 @@ const Login = ({navigation}) => {
 
     const handleLogin = () =>{
         email && password ?
-        alert("Login Success"):
+        navigation.navigate('needydashboard'):
         alert("Fill all fields")
     }
 

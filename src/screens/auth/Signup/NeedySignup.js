@@ -4,7 +4,7 @@ import { ICONS, IMAGES,COLORS,wp,hp, FONTS } from '../../../constants'
 import { Header, SubHeader } from '../components'
 import { RegForm } from './components'
 
-const DonorSignup = ({navigation}) =>{
+const NeedySignup = ({navigation}) =>{
 
     const [name,setName] = useState()
     const [address,setAddress] = useState()
@@ -20,8 +20,8 @@ const DonorSignup = ({navigation}) =>{
     return(
         <KeyboardAvoidingView behavior='position'>
             <ScrollView>
-            <Header img={IMAGES.d2}/>
-            <SubHeader title="Register as donor" Goback={()=>navigation.goBack()}/>
+            <Header img={IMAGES.d1}/>
+            <SubHeader title="Register as Needy" Goback={()=>navigation.goBack()}/>
             <View style={Styles.socialSignup}>
                    <View style={Styles.icon}>
                         <ICONS.Fontisto 
@@ -49,16 +49,16 @@ const DonorSignup = ({navigation}) =>{
             setAddress={setAddress} email={email} setEmail={setEmail} 
             cell={cell} setCell={setCell} handleReg={handleRegistration}/>
 
-            <TouchableOpacity style={Styles.regView} onPress={()=>navigation.navigate('needysignup')}>
-                        <Text style={Styles.reg}>Or, register as needy</Text>
+            <TouchableOpacity style={Styles.regView} onPress={()=>navigation.navigate('donorsignup')}>
+                        <Text style={Styles.reg}>Or, register as donor</Text>
                         <ICONS.AntDesign name="arrowright" style={Styles.icon2} size={18}/>
             </TouchableOpacity>
-        </ScrollView>
+            </ScrollView>
         </KeyboardAvoidingView>
     )
 }
 
-export default DonorSignup
+export default NeedySignup
 
 const Styles = StyleSheet.create({
     socialSignup:{

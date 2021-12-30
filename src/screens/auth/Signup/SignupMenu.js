@@ -7,7 +7,7 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
 const Signup = ({navigation}) =>{
     return(
         <ScrollView style={{backgroundColor:'rgba(0,0,0,0.03)'}}>
-            <Header title="ShareClub" Goback={()=>navigation.goBack()}/>
+            <Header title="ShareClub" Goback={()=>navigation.goBack()} iconName="arrow-left"/>
             <Image source={IMAGES.wallpaper1} style={Styles.img}/>
             <View style={Styles.footer}>
                 <View>
@@ -20,6 +20,7 @@ const Signup = ({navigation}) =>{
                     <Button
                         title="Register as Needy"
                         btnStyle={{...Styles.btn,marginTop:wp(1)}}
+                        onPress={()=>navigation.navigate('needysignup')}
                     />
                 </View>
                     <TouchableOpacity onPress={()=>navigation.navigate('login')}>
