@@ -1,14 +1,15 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput} from 'react-native'
+import {View, Text, StyleSheet, TextInput, ScrollView,} from 'react-native'
 import { Header } from '../../../components'
-import { COLORS, hp, ICONS, wp } from '../../../constants'
+import { COLORS, hp, wp } from '../../../constants'
 import { Card,Paragraph, Title } from 'react-native-paper'
 import { Button } from '../../../components/form'
+import { Categories, Statistics } from './components'
 
 const needyDashboard = () =>{
 
     return(
-        <View>
+        <ScrollView>
             <Header title="ShareClub" iconName="menu" iconRight="bell"/>
             <TextInput placeholder='Search...' style={Styles.search}/>
             <View>
@@ -30,64 +31,21 @@ const needyDashboard = () =>{
                 </Card>
             </View>
 
-<View style={{flexDirection:'row'}}>
-        <View style={Styles.catgories}>
-            <View style={Styles.categoryIcon}>
-                <ICONS.MaterialIcons name="food-bank" size={32} color={COLORS.red1}
-                    style={{marginLeft:wp(3.5),marginTop:hp(1.7)}}
-                />
-            </View>
-            <View>
-                <Text style={Styles.categoryName}>Food</Text>
-            </View>
-        </View>
 
-{/* number 2 */}
-        <View style={Styles.catgories}>
-            <View style={Styles.categoryIcon}>
-                <ICONS.Foundation name="foot" size={32} color={COLORS.red1}
-                    style={{marginLeft:wp(3.5),marginTop:hp(1.7)}}
-                />
-            </View>
-            <View>
-                <Text style={Styles.categoryName}>Shoes</Text>
-            </View>
-        </View>
+        <Categories/>
+
+    <Text style={{fontWeight:"bold",fontSize:16, color:'black', marginLeft:wp(5),marginTop:hp(2)}}>
+        Statistics
+    </Text>
+
+
+    <Statistics/>
+        
 
 
 
 
-
-
-
-{/* number 3 */}
-        <View style={Styles.catgories}>
-            <View style={Styles.categoryIcon}>
-                <ICONS.Ionicons name="shirt" size={28} color={COLORS.red1}
-                    style={{marginLeft:wp(3.5),marginTop:hp(1.7)}}
-                />
-            </View>
-            <View>
-                <Text style={Styles.categoryName}>Clothes</Text>
-            </View>
-        </View>
-{/* number 4 */}
-        <View style={Styles.catgories}>
-            <View style={Styles.categoryIcon}>
-                <ICONS.Entypo name="grid" size={32} color={COLORS.red1}
-                    style={{marginLeft:wp(3.5),marginTop:hp(1.7)}}
-                />
-            </View>
-            <View>
-                <Text style={Styles.categoryName}>More</Text>
-            </View>
-        </View>
-
-</View>
-
-<Text style={{fontWeight:"bold",fontSize:16, color:'black', marginLeft:wp(5),marginTop:hp(2)}}>Statistics</Text>
-
-        </View>
+    </ScrollView>
     )
 }
 
@@ -115,22 +73,5 @@ const Styles = StyleSheet.create({
         marginTop:hp(0.7),
         height:hp(6)
     },
-    catgories:{
-        marginHorizontal:wp(5),
-        marginTop:hp(2)
-    },
-    categoryIcon:{
-        height:hp(8),
-        width:wp(15),
-        backgroundColor:COLORS.orange4,
-        borderRadius:wp(4)
-    },
-    categoryName:{
-        marginLeft:wp(1), 
-        textAlign:'center',
-        width:wp(12),
-        fontSize:13,
-        fontWeight:'bold',
-        textAlign:'center'
-    }
+    
 })

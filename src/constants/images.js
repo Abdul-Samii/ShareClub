@@ -5,6 +5,10 @@ import happyE from '../../assets/images/happyEmoji.png'
 import wallP1 from '../../assets/images/wallpaper1.png'
 import d21 from '../../assets/images/d2.jpg'
 import d31 from '../../assets/images/d3.jpg'
+import dash1 from '../../assets/images/dashboard1.jpg'
+import dash2 from '../../assets/images/dashboard2.jpg'
+import dash3 from '../../assets/images/dashboard3.jpg'
+
 export const IMAGES={
     //  add all images here thenn you can just simply 
     //  import IMAGE object in you project and call it like
@@ -18,4 +22,7 @@ export const IMAGES={
     wallpaper1:wallP1,
     d2:d21,
     d1:d31,
+    dashboard1:dash1,
+    dashboard2:dash2,
+    dashboard3:dash3,
 }
