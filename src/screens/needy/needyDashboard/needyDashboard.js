@@ -4,9 +4,9 @@ import { Header } from '../../../components'
 import { COLORS, hp, wp } from '../../../constants'
 import { Card,Paragraph, Title } from 'react-native-paper'
 import { Button } from '../../../components/form'
-import { Categories, Statistics } from './components'
+import { Categories, Statistics, TTabs } from './components'
 
-const needyDashboard = () =>{
+const NeedyDashboard = () =>{
 
     return(
         <ScrollView>
@@ -44,12 +44,11 @@ const needyDashboard = () =>{
 
 
 
-
     </ScrollView>
     )
 }
 
-export default needyDashboard
+export default NeedyDashboard
 
 const Styles = StyleSheet.create({
     search:{

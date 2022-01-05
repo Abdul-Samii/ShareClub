@@ -1,1 +1,2 @@
-export {default as needyDashboard} from './needyDashboard'
+export {default as NeedyDashboard} from './NeedyDashboard'
+export {default as Needy} from './Needy'
