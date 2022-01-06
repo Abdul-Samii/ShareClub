@@ -8,7 +8,7 @@ import {isReadyRef, navigationRef} from './rootNavigation';
 import {RouteList, initialRouteName} from './routeList';
 
 const Stack = createStackNavigator();
-export class Route extends Component {
+export class AuthRoute extends Component {
   // componentDidMount() {
   //   return () => {
   //     isReadyRef.current = true;
@@ -39,4 +39,4 @@ export class Route extends Component {
   }
 }
 
-export default Route;
+export default AuthRoute;

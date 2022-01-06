@@ -1,17 +1,18 @@
-import React  from "react";
-import {View, Text} from 'react-native';
-import NeedyDashboard from "./NeedyDashboard";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { hp, ICONS } from "../../../constants";
-import { Categories } from "./components";
+import React from 'react'
+import { StyleSheet, Text, View,StatusBar } from 'react-native'
+import { COLORS, ICONS } from '../../../constants'
+import { NeedyDashboard } from '../../needy'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Tab = createBottomTabNavigator();
 
 
-const Needy=()=>{
-    return(
-        <View>
-            
+
+const Needy = () => {
+    return (
+        // later we will wrap this route inside redux provider to access the store all over the application
+      <>
+      
             <Tab.Navigator 
     screenOptions={({ route }) => ({
       tabBarIcon: ({color, size }) => {
@@ -39,8 +40,12 @@ const Needy=()=>{
       <Tab.Screen name="Post" component={NeedyDashboard} options={{headerShown:false,title:""}}/>
       <Tab.Screen name="Profile" component={NeedyDashboard} options={{headerShown:false,title:""}}/>
     </Tab.Navigator >
-      
-    </View>
+  
+       
+      </>
     )
 }
-export default Needy
+
+export default Needy;
+
+const styles = StyleSheet.create({})

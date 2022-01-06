@@ -1,11 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View,StatusBar } from 'react-native'
-import Route from './routes'
+// import Route from './routes/auth'
 import * as eva from '@eva-design/eva'
 import {ApplicationProvider,IconRegistry } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper'
 import { COLORS } from './constants'
+import { Needy } from './screens/needy'
+import { NavigationContainer } from '@react-navigation/native'
+import AuthRoute from './routes/auth'
+import NeedyRoute from './routes/needy'
 
 
 const theme = {
@@ -27,8 +31,7 @@ const App = () => {
       <ApplicationProvider {...eva} theme={eva.light}>
         <PaperProvider theme={theme}>
         <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
-
-          <Route/>
+            <NeedyRoute/>
         </PaperProvider>
       
       </ApplicationProvider>

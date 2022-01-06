@@ -6,7 +6,7 @@ import { Card,Paragraph, Title } from 'react-native-paper'
 import { Button } from '../../../components/form'
 import { Categories, Statistics, TTabs } from './components'
 
-const NeedyDashboard = () =>{
+const NeedyDashboard = ({navigation}) =>{
 
     return(
         <ScrollView>
@@ -24,6 +24,7 @@ const NeedyDashboard = () =>{
                             <Button title="Start Now"
                                 btnStyle={Styles.btnTop}
                                 btnTextStyle={{color:'black'}}
+                                onPress={()=>navigation.navigate("login")}
                             />
                         </View>
                     </View>
