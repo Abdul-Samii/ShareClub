@@ -21,24 +21,29 @@ const Needy = () => {
         if (route.name === 'Home') {
           iconName = 'home'        
         }
-        else if(route.name === 'Post')
+        else if(route.name === 'Search')
         {
-          iconName= 'plus-circle'
+          iconName= 'search'
+        }
+        else if(route.name === 'Ads')
+        {
+          iconName= 'albums-sharp'
         }
         else if(route.name === 'Profile')
         {
-          iconName = 'user'
+          iconName = 'person'
         }
         // You can return any component that you like here!
-        return <Text ><ICONS.Feather name={iconName} size={35} color={color} /></Text>
+        return <Text ><ICONS.Ionicons name={iconName} size={30} color={color} /></Text>
      
       },
-      tabBarActiveTintColor: 'black',
-      tabBarInactiveTintColor: 'lightblue',
+      tabBarActiveTintColor: COLORS.red1,
+      tabBarInactiveTintColor: COLORS.red2,
     })}>
-      <Tab.Screen name='Home' component={NeedyDashboard} options={{headerShown:false,title:""}} />
-      <Tab.Screen name="Post" component={NeedyDashboard} options={{headerShown:false,title:""}}/>
-      <Tab.Screen name="Profile" component={NeedyDashboard} options={{headerShown:false,title:""}}/>
+      <Tab.Screen name='Home' component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
+      <Tab.Screen name="Search" component={NeedyDashboard} options={{headerShown:false,title:"Search"}}/>
+      <Tab.Screen name="Ads" component={NeedyDashboard} options={{headerShown:false,title:"Ads"}}/>
+      <Tab.Screen name="Profile" component={NeedyDashboard} options={{headerShown:false,title:"Profile"}}/>
     </Tab.Navigator >
   
        
