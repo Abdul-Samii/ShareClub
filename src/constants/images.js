@@ -8,6 +8,7 @@ import d31 from '../../assets/images/d3.jpg'
 import dash1 from '../../assets/images/dashboard1.jpg'
 import dash2 from '../../assets/images/dashboard2.jpg'
 import dash3 from '../../assets/images/dashboard3.jpg'
+import user1 from '../../assets/images/user.jpg'
 
 export const IMAGES={
     //  add all images here thenn you can just simply 
@@ -25,4 +26,5 @@ export const IMAGES={
     dashboard1:dash1,
     dashboard2:dash2,
     dashboard3:dash3,
+    user:user1,
 }

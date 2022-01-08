@@ -1,12 +1,14 @@
-import { DonorSignup, ForgotPassword, Login, NeedySignup, NewPassword, ResetCode, Signup } from "../../screens";
-import { Needy, NeedyDashboard } from "../../screens/needy";
+import {Needy,NeedyDashboard, NeedyProfile} from '../../screens'
 // export const initialRouteName = 'splash';
 // export const initialRouteName = 'login';  //for sample test right now I set the initialRoute to login
 
 
 export const RouteList = [
   // {name: 'splash', component: SplashScreen},
-  {name:'needy', component:Needy},
+  // {name:'needy', component:Needy},
+  {name:'needyprofile',component:NeedyProfile}
+
+
     // {name:'signup',component:Signup},
     // {name:'login', component:Login},
     // {name:'forgotpassword', component:ForgotPassword},
