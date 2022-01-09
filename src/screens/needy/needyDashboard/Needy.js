@@ -5,6 +5,7 @@ import { NeedyDashboard } from '../../needy'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {hp} from '../../../constants'
 import { NeedyProfile } from '../needyProfile'
+import { Notification } from '../..'
 const Tab = createBottomTabNavigator();
 
 
@@ -58,7 +59,7 @@ const Needy = () => {
       tabBarInactiveTintColor: COLORS.red2,
     })}>
       <Tab.Screen name='Home'  component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
-      <Tab.Screen name="Notification" component={NeedyDashboard} options={{headerShown:false,title:"Notification"}}/>
+      <Tab.Screen name="Notification" component={Notification} options={{headerShown:false,title:"Notification"}}/>
       <Tab.Screen name="Search" component={NeedyDashboard} options={{headerShown:false,title:"Ads"}}/>
       <Tab.Screen name="Ads" component={NeedyDashboard} options={{headerShown:false,title:"Search"}}/>
       <Tab.Screen name="Profile" component={NeedyProfile} options={{headerShown:false,title:"Profile"}}/>

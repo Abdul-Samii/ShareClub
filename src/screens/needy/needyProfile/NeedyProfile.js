@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {View, Text, StyleSheet,Image,FlatList} from 'react-native'
 import { Header } from '../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
@@ -8,6 +8,10 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
 
 
 const NeedyProfile=()=>{
+    const [name,setName] = useState("Abdul Sami")
+    const [profession,setProfession] = useState("Student")
+    const [cell,setCell] = useState("+923181529339")
+    const [email, setEmail] = useState("ksamk100474@gmail.com")
 
     const list=[
         {name:'Address', icon:'location-city'},
@@ -46,8 +50,8 @@ const NeedyProfile=()=>{
                 <View style={Styles.top}>
                     <Image source={IMAGES.user} style={Styles.img}/>
                     <View style={Styles.nameDesc}>
-                        <Text style={Styles.name}>Abdul Sami</Text>
-                        <Text>Student</Text>
+                        <Text style={Styles.name}>{name}</Text>
+                        <Text>{profession}</Text>
                     </View>
                 </View>
                 <ICONS.Feather name="edit" size={17} 
@@ -59,12 +63,12 @@ const NeedyProfile=()=>{
 
         <View style={Styles.flex}>
             <ICONS.FontAwesome name="phone" size={17}/>
-            <Text style={Styles.itemName}>+923181529339</Text>
+            <Text style={Styles.itemName}>{cell}</Text>
         </View>
 
         <View style={Styles.flex}>
             <ICONS.Fontisto name="email" size={17}/>
-            <Text style={Styles.itemName}>ksamk100474@gmail.com</Text>
+            <Text style={Styles.itemName}>{email}</Text>
         </View>
     </View>
 
