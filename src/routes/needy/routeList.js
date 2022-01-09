@@ -5,9 +5,8 @@ import {Needy,NeedyDashboard, NeedyProfile} from '../../screens'
 
 export const RouteList = [
   // {name: 'splash', component: SplashScreen},
-  // {name:'needy', component:Needy},
-  {name:'needyprofile',component:NeedyProfile}
-
+  {name:'needy', component:Needy},
+  {name:'needyprofile',component:NeedyProfile},
 
     // {name:'signup',component:Signup},
     // {name:'login', component:Login},

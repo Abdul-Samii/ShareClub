@@ -1,120 +1,130 @@
 import React from 'react'
-import {View, Text, StyleSheet,Image} from 'react-native'
-import {Header} from '../../../components'
+import {View, Text, StyleSheet,Image,FlatList} from 'react-native'
+import { Header } from '../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
-const NeedyDashboard=()=>{
+
+
+
+
+
+const NeedyProfile=()=>{
+
+    const list=[
+        {name:'Address', icon:'location-city'},
+        {name:'Change Password', icon:'vpn-key'},
+        {name:'Help', icon:'live-help'},
+        {name:'Share',icon:'share'},
+        {name:'Settings', icon:'settings'},
+        {name:'Logout', icon:'logout'},
+    ]
+
+
+    const handleFlatlist=(item)=>{
+        console.log(item)
+        return(
+        <View style={Styles.contactDetail}>
+            <View 
+                style={{
+                    borderBottomWidth:0.5,
+                    opacity:0.1
+                }}
+            />
+            <View style={Styles.flex}>
+                <ICONS.MaterialIcons name={item.icon} size={17}/>
+                <Text style={Styles.itemName}>{item.name}</Text>
+            </View>
+
+    </View>
+
+        )
+    }
+
     return(
-        <View style={Styles.outer}>
-            <Header title="Profile" iconName="arrow-left"/>
-
-
-    <View style={Styles.imgAndDesc}>
-            <View style={Styles.pic}>
-                 <Image source={IMAGES.user} style={Styles.img}/>
+        <View>
+            <Header title="Profile"/>
+            <View style={{flexDirection:'row'}}>
+                <View style={Styles.top}>
+                    <Image source={IMAGES.user} style={Styles.img}/>
+                    <View style={Styles.nameDesc}>
+                        <Text style={Styles.name}>Abdul Sami</Text>
+                        <Text>Student</Text>
+                    </View>
+                </View>
+                <ICONS.Feather name="edit" size={17} 
+                    style={{position:'absolute',marginLeft:wp(65),marginTop:hp(3.5)}}
+                />
             </View>
-            <View style={Styles.desc}>
-                <Text style={Styles.name}>Abdul Sami</Text>
-                <Text style={Styles.address}>
-                    <ICONS.Ionicons name="location-sharp" size={15}/>
-                    Islamabad, Pakistan</Text>
-                <Text style={Styles.email}>
-                <ICONS.MaterialCommunityIcons  name="email" size={15}/>
-                       Ksamk100474@gmail.com</Text>
-            </View>
+
+     <View style={Styles.contactDetail}>
+
+        <View style={Styles.flex}>
+            <ICONS.FontAwesome name="phone" size={17}/>
+            <Text style={Styles.itemName}>+923181529339</Text>
+        </View>
+
+        <View style={Styles.flex}>
+            <ICONS.Fontisto name="email" size={17}/>
+            <Text style={Styles.itemName}>ksamk100474@gmail.com</Text>
+        </View>
     </View>
-    
-    <View style={Styles.line}/>
 
-    <View style={{flexDirection:'row'}}>
 
+    <View style={Styles.flex}>
         <View style={Styles.stat}>
-            <Text style={Styles.num}>20</Text>
-            <Text style={Styles.numDesc}>Donations accepted</Text>
+            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>23</Text>
+            <Text style={{color:COLORS.gray2}}>Donations Accepted</Text>
         </View>
-
-            <ICONS.MaterialCommunityIcons name="share-circle" size={45} color={COLORS.red2}/>
-
-        <View  style={Styles.shareIcon}>
-        </View>
-
-
         <View style={Styles.stat}>
-            <Text style={Styles.num}>20</Text>
-            <Text style={Styles.numDesc}>Donations accepted</Text>
+            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>3</Text>
+            <Text style={{color:COLORS.gray2}}>Donations Pending</Text>
         </View>
-
     </View>
+
+
+
+    <FlatList
+        data={list}
+        keyExtractor={(item)=>item.name}
+        renderItem={(data)=>handleFlatlist(data.item)}
+    />
 
         </View>
     )
 }
-
-export default NeedyDashboard
+export default NeedyProfile
 
 const Styles = StyleSheet.create({
-    outer:{
-        backgroundColor:COLORS.red1,
-        height:hp(40)
-    },
-    pic:{
-        marginTop:hp(-1)
-    },  
-    img:{
-        height:hp(13),
-        width:wp(21),
-        borderRadius:60
-    },
-    imgAndDesc:{
+    top:{
         flexDirection:'row',
-        marginTop:hp(4),
-        marginLeft:wp(10)
+        marginTop:hp(3),
+        marginLeft:wp(5)
     },
-    desc:{
-        marginLeft:wp(6),
+    img:{
+        height:hp(10),
+        width:wp(20),
+        borderRadius:wp(10),
+    },
+    nameDesc:{
+        marginLeft:wp(6)
     },
     name:{
-        color:COLORS.white,
-        fontSize:20,
-        fontWeight:'bold'
-    },
-    address:{
-        color:COLORS.white,
-        fontSize:15,
-        marginLeft:wp(-1)
-    },
-    email:{
-        fontSize:15,
-        color:COLORS.white,
-        marginLeft:wp(-0.5)
-    },
-    line:{
-        borderBottomColor: 'black',
-        borderBottomWidth: 0.3,
-        marginTop:hp(7)
-    },
-    num:{
-        color:COLORS.white,
-        fontSize:22,
         fontWeight:'bold',
-        textAlign:'center',
-        backgroundColor:'blue'
+        fontSize:20,
+
     },
-    numDesc:{
-        color:COLORS.white,
-        width:wp(40),
+    flex:{
+        flexDirection:'row',
+        marginTop:hp(2)
+    },
+    itemName:{
+        marginLeft:wp(3),
+    },
+    contactDetail:{
+        marginHorizontal:wp(5),
+        marginTop:hp(2)
     },
     stat:{
-        marginLeft:wp(8)
-    },
-    shareIcon:{
-        marginTop:hp(-7),
-        marginLeft:wp(-15),
-        width: 126,
-    height: 180,
-    backgroundColor: COLORS.red1,
-    borderTopLeftRadius: 108,
-    borderTopRightRadius: 108,
-    borderBottomLeftRadius: 95,
-    borderBottomRightRadius: 95,
+        marginLeft:wp(10),
+        marginTop:hp(2)
     }
 })

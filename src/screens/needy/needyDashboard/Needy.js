@@ -4,6 +4,7 @@ import { COLORS, ICONS, wp } from '../../../constants'
 import { NeedyDashboard } from '../../needy'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {hp} from '../../../constants'
+import { NeedyProfile } from '../needyProfile'
 const Tab = createBottomTabNavigator();
 
 
@@ -27,15 +28,23 @@ const Needy = () => {
         }
         else if(route.name === 'Search')
         {
-          iconName= 'search'
-          return <View style={{backgroundColor:color,borderRadius:30,height:58,width:58,marginTop:hp(0),marginLeft:wp(0)}}>
-            <Text style={{marginLeft:wp(3.7),marginTop:hp(1.6)}}><ICONS.Ionicons name={iconName} size={27} color='white' /></Text>
+          iconName= 'albums-sharp'
+          return <View style={{
+            position: 'absolute',
+            bottom: 0, // space from bottombar
+            height: 68,
+            width: 68,
+            borderRadius: 68,
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}>
+            <Text ><ICONS.Ionicons name={iconName} size={40} color={color} /></Text>
             </View>
 
         }
         else if(route.name === 'Ads')
         {
-          iconName= 'albums-sharp'
+          iconName= 'search'
         }
         else if(route.name === 'Profile')
         {
@@ -45,14 +54,14 @@ const Needy = () => {
         return <Text ><ICONS.Ionicons name={iconName} size={25} color={color} /></Text>
      
       },
-      tabBarActiveTintColor: COLORS.red1,
+      tabBarActiveTintColor: COLORS.blue2,
       tabBarInactiveTintColor: COLORS.red2,
     })}>
       <Tab.Screen name='Home'  component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
       <Tab.Screen name="Notification" component={NeedyDashboard} options={{headerShown:false,title:"Notification"}}/>
-      <Tab.Screen name="Search" component={NeedyDashboard} options={{headerShown:false,title:""}}/>
-      <Tab.Screen name="Ads" component={NeedyDashboard} options={{headerShown:false,title:"Ads"}}/>
-      <Tab.Screen name="Profile" component={NeedyDashboard} options={{headerShown:false,title:"Profile"}}/>
+      <Tab.Screen name="Search" component={NeedyDashboard} options={{headerShown:false,title:"Ads"}}/>
+      <Tab.Screen name="Ads" component={NeedyDashboard} options={{headerShown:false,title:"Search"}}/>
+      <Tab.Screen name="Profile" component={NeedyProfile} options={{headerShown:false,title:"Profile"}}/>
     </Tab.Navigator >
   
        
