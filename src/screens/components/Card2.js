@@ -56,6 +56,7 @@ const Styles = StyleSheet.create({
         fontWeight:'bold',
         marginTop:hp(4),
         marginLeft:wp(-20),
+        width:wp(35),
         fontSize:20
     },
     horizontalLine:{
@@ -64,6 +65,7 @@ const Styles = StyleSheet.create({
         borderRadius:wp(10),
         width:wp(30),
         marginLeft:wp(2),
-        marginTop:hp(5)
+        marginTop:hp(16),
+        position:'absolute',
     }
 })

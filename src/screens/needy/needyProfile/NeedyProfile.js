@@ -24,7 +24,6 @@ const NeedyProfile=()=>{
 
 
     const handleFlatlist=(item)=>{
-        console.log(item)
         return(
         <View style={Styles.contactDetail}>
             <View 

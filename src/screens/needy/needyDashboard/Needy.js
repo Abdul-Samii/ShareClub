@@ -5,7 +5,8 @@ import { NeedyDashboard } from '../../needy'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {hp} from '../../../constants'
 import { NeedyProfile } from '../needyProfile'
-import { Notification } from '../..'
+import { ChatHome, Notification } from '../..'
+import { ManageDonations } from '../donationAds'
 const Tab = createBottomTabNavigator();
 
 
@@ -17,6 +18,7 @@ const Needy = () => {
       
             <Tab.Navigator 
     screenOptions={({ route }) => ({
+      
       tabBarIcon: ({color, size }) => {
         let iconName;
 
@@ -27,7 +29,7 @@ const Needy = () => {
         {
           iconName= 'notifications'
         }
-        else if(route.name === 'Search')
+        else if(route.name === 'Ads')
         {
           iconName= 'albums-sharp'
           return <View style={{
@@ -39,13 +41,13 @@ const Needy = () => {
             justifyContent: 'center',
             alignItems: 'center',
         }}>
-            <Text ><ICONS.Ionicons name={iconName} size={40} color={color} /></Text>
+            <Text ><ICONS.Ionicons name={iconName}  size={40} color={color} /></Text>
             </View>
 
         }
-        else if(route.name === 'Ads')
+        else if(route.name === 'Chat')
         {
-          iconName= 'search'
+          iconName= 'chatbubble-ellipses'
         }
         else if(route.name === 'Profile')
         {
@@ -57,11 +59,18 @@ const Needy = () => {
       },
       tabBarActiveTintColor: 'red',
       tabBarInactiveTintColor: COLORS.red2,
-    })}>
+      // tabBarStyle: {
+      //   backgroundColor: COLORS.white
+      // }
+      
+    })}
+    
+    
+    >
       <Tab.Screen name='Home'  component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
       <Tab.Screen name="Notification" component={Notification} options={{headerShown:false,title:"Notification"}}/>
-      <Tab.Screen name="Search" component={NeedyDashboard} options={{headerShown:false,title:"Ads"}}/>
-      <Tab.Screen name="Ads" component={NeedyDashboard} options={{headerShown:false,title:"Search"}}/>
+      <Tab.Screen name="Ads" component={ManageDonations} options={{headerShown:false,title:"Ads"}}/>
+      <Tab.Screen name="Chat" component={ChatHome} options={{headerShown:false,title:"Chat"}}/>
       <Tab.Screen name="Profile" component={NeedyProfile} options={{headerShown:false,title:"Profile"}}/>
     </Tab.Navigator >
   
