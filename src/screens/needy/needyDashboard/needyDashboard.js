@@ -1,11 +1,11 @@
 import React from 'react'
 import {View, Text, StyleSheet, TextInput, ScrollView,} from 'react-native'
 import { Header } from '../../../components'
-import { COLORS, hp, wp } from '../../../constants'
+import { COLORS, hp, IMAGES, wp } from '../../../constants'
 import { Card,Paragraph, Title } from 'react-native-paper'
 import { Button } from '../../../components/form'
 import { Categories, Statistics, TTabs } from './components'
-
+import { Card1 } from '../..'
 const NeedyDashboard = ({navigation}) =>{
 
     return(
@@ -39,10 +39,11 @@ const NeedyDashboard = ({navigation}) =>{
         Statistics
     </Text>
 
-
-    <Statistics/>
         
-
+    
+    <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" number={10}/>
+    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number={10}/>
+    <Card1 img={IMAGES.dashboard3} cardText="Donations Rejected" number={10}/>        
 
 
     </ScrollView>

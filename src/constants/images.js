@@ -9,6 +9,9 @@ import dash1 from '../../assets/images/dashboard1.jpg'
 import dash2 from '../../assets/images/dashboard2.jpg'
 import dash3 from '../../assets/images/dashboard3.jpg'
 import user1 from '../../assets/images/user.jpg'
+import nearby1 from '../../assets/images/nearby.png'
+import hand1 from '../../assets/images/hand.png'
+import spearker1 from '../../assets/images/speaker.png'
 
 export const IMAGES={
     //  add all images here thenn you can just simply 
@@ -27,4 +30,7 @@ export const IMAGES={
     dashboard2:dash2,
     dashboard3:dash3,
     user:user1,
+    nearby:nearby1,
+    hand:hand1,
+    speaker:spearker1,
 }

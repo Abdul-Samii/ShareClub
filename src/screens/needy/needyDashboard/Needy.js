@@ -55,7 +55,7 @@ const Needy = () => {
         return <Text ><ICONS.Ionicons name={iconName} size={25} color={color} /></Text>
      
       },
-      tabBarActiveTintColor: COLORS.blue2,
+      tabBarActiveTintColor: 'red',
       tabBarInactiveTintColor: COLORS.red2,
     })}>
       <Tab.Screen name='Home'  component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
