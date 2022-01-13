@@ -9,7 +9,7 @@ const ManageDonations = () =>{
     return(
         <ScrollView style={Styles.container}>
             
-            <Header title="Manage Donations" iconRight="bell"/>
+            <Header title="Manage Donations" iconRight="bell" iconName="menu"/>
             <View style={Styles.cardContainer}>
                 <Card2 img={IMAGES.nearby} text="Search Nearby Donation Ads"/>
                 <Card2 img={IMAGES.hand} text="View Booked Donation Ads"/>

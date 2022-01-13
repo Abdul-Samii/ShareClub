@@ -48,6 +48,10 @@ const Needy = () => {
         else if(route.name === 'Chat')
         {
           iconName= 'chatbubble-ellipses'
+          return <View style={{flexDirection:'row'}}><ICONS.Ionicons name={iconName} size={25} color={color} />
+          <Text style={{backgroundColor:COLORS.red1,color:COLORS.white,width:wp(5),height:hp(2.5),fontSize:13,fontWeight:'bold',textAlign:'center',borderRadius:10,marginLeft:wp(-3)}}>2</Text>
+          </View>
+
         }
         else if(route.name === 'Profile')
         {

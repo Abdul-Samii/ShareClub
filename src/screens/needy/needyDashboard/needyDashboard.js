@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, TextInput, ScrollView,} from 'react-native'
+import {View, Text, StyleSheet, TextInput, ScrollView, Alert,} from 'react-native'
 import { Header } from '../../../components'
 import { COLORS, hp, IMAGES, wp } from '../../../constants'
 import { Card,Paragraph, Title } from 'react-native-paper'
@@ -24,7 +24,7 @@ const NeedyDashboard = ({navigation}) =>{
                             <Button title="Start Now"
                                 btnStyle={Styles.btnTop}
                                 btnTextStyle={{color:'black'}}
-                                onPress={()=>navigation.navigate("login")}
+                                onPress={()=>alert("You Press Start Now")}
                             />
                         </View>
                     </View>
