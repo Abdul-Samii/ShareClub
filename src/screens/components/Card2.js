@@ -7,7 +7,6 @@ const Card2 = ({img, text}) =>{
     return(
         <View style={Styles.container}>
             
-            <TouchableOpacity>
                 <View style={Styles.cardOuter}>
                     <Image source={img} style={Styles.img}/>
                     <View style={Styles.cardText}>
@@ -17,7 +16,6 @@ const Card2 = ({img, text}) =>{
                         />
                     </View>
                 </View>
-             </TouchableOpacity>
 
         </View>
     )

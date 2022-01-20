@@ -1,9 +1,12 @@
-import React from 'react'
-import {View, Text, StyleSheet,TouchableOpacity, Image,ScrollView,FlatList, Touchable} from 'react-native'
+import React,{useState} from 'react'
+import {View, Text, StyleSheet,TouchableOpacity, Image,ScrollView,FlatList, Touchable, TextInput} from 'react-native'
 import { Header } from '../../components'
-import { hp, IMAGES, wp } from '../../constants'
+import { hp, ICONS, IMAGES, wp } from '../../constants'
 
 const ChatHome=()=>{
+
+    const [search,setSearch] = useState(false)
+
     const users = [
             {name:'sami',img:IMAGES.user},
             {name:'sami',img:IMAGES.user},
@@ -52,7 +55,19 @@ const ChatHome=()=>{
     }
     return(
         <View style={Styles.container}>
-            <Header title="Messages" iconRight="bell" iconName="search"/>
+            {
+                search?
+                    <>
+                        <View style={{flexDirection:'row'}}>
+                            <TextInput placeholder='Search...' style={Styles.search}/>
+                            <TouchableOpacity onPress={()=>setSearch(false)} style={Styles.searchCloseIcon}>
+                                <ICONS.AntDesign name="close"  size={15} />
+                            </TouchableOpacity>
+                        </View> 
+                    </>
+                :<Header title="Messages" iconRight="bell" iconName="search" Goback={()=>setSearch(true)}/> 
+
+            }
 
 
         <Text style={Styles.userHeading}>Users</Text>
@@ -145,5 +160,19 @@ const Styles = StyleSheet.create({
         borderBottomWidth:0.4,
         marginTop:hp(2),
         opacity:0.1
+    },
+    search:{
+        borderWidth:0.2,
+        height:hp(6),
+        marginHorizontal:wp(5),
+        borderRadius:wp(1),
+        marginTop:hp(2),
+        width:wp(90),
+        marginLeft:wp(0)
+    },
+    searchCloseIcon:{
+        position:'absolute',
+        marginLeft:wp(83),
+        marginTop:hp(4)
     }
 })

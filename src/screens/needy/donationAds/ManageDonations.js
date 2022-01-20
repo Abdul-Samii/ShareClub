@@ -5,14 +5,14 @@ import { Header } from '../../../components'
 import { COLORS, FONTS, hp, IMAGES, wp } from '../../../constants'
 
 
-const ManageDonations = () =>{
+const ManageDonations = ({navigation}) =>{
     return(
         <ScrollView style={Styles.container}>
             
             <Header title="Manage Donations" iconRight="bell" iconName="menu"/>
             <View style={Styles.cardContainer}>
                 <Card2 img={IMAGES.nearby} text="Search Nearby Donation Ads"/>
-                <Card2 img={IMAGES.hand} text="View Booked Donation Ads"/>
+                <TouchableOpacity onPress={()=>navigation.navigate('bookeddonations')}><Card2 img={IMAGES.hand} text="View Booked Donation Ads" /></TouchableOpacity>
                 <Card2 img={IMAGES.speaker} text="Search Donations in Notifications"/>
             </View>
         </ScrollView>
