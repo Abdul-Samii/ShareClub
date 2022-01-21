@@ -11,8 +11,16 @@ const ManageDonations = ({navigation}) =>{
             
             <Header title="Manage Donations" iconRight="bell" iconName="menu"/>
             <View style={Styles.cardContainer}>
+
+            <TouchableOpacity onPress={()=>navigation.navigate('searchnearby')}>
                 <Card2 img={IMAGES.nearby} text="Search Nearby Donation Ads"/>
-                <TouchableOpacity onPress={()=>navigation.navigate('bookeddonations')}><Card2 img={IMAGES.hand} text="View Booked Donation Ads" /></TouchableOpacity>
+            </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>navigation.navigate('bookeddonations')}>
+                    <Card2 img={IMAGES.hand} text="View Booked Donation Ads" />
+                </TouchableOpacity>
+
+
                 <Card2 img={IMAGES.speaker} text="Search Donations in Notifications"/>
             </View>
         </ScrollView>
