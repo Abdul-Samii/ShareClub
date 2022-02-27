@@ -1,27 +1,37 @@
 import React,{useState} from 'react'
 import {View, Text, StyleSheet,KeyboardAvoidingView,ScrollView,TouchableOpacity} from 'react-native'
+import { connect } from 'react-redux'
 import { ICONS, IMAGES,COLORS,wp,hp, FONTS } from '../../../constants'
+import { RegisterNeedy } from '../../../store/actions'
 import { Header, SubHeader } from '../components'
 import { RegForm } from './components'
 
-const NeedySignup = ({navigation}) =>{
+const NeedySignup = (props) =>{
 
     const [name,setName] = useState()
-    const [address,setAddress] = useState()
     const [email,setEmail] = useState()
-    const [cell,setCell] = useState()
-
-    const handleRegistration = () =>{
-        name&&address&&email&&cell?
-                alert("Registration successfull")
-        :       alert("Fill all fields")
+    const [phone,setPhone] = useState("")
+    const [password,setPassword] = useState()
+    const [confirmPassword,setConfirmPassword] = useState()
+    
+    const handleRegistration = async() =>{
+        var obj;
+        !name&&!email&&!phone?alert("Fill all fields"):
+            phone.length!=13?alert("Phone number length is invalid"):
+             phone[0]!='+'&&phone[1]!='9'&&phone[2]!='2'? alert("Invalid phone number"):
+                password.length<8? alert("Password should be minimum 8 charactors"):
+                    password !== confirmPassword?alert("Password donot march!"):( obj={name,email,phone,password}, await props.RegisterNeedy(obj))
+                            
+                            
+        
+        
     }
 
     return(
         <KeyboardAvoidingView behavior='position'>
             <ScrollView>
             <Header img={IMAGES.d1}/>
-            <SubHeader title="Register as Needy" Goback={()=>navigation.goBack()}/>
+            <SubHeader title="Register as Needy" Goback={()=>props.navigation.goBack()}/>
             <View style={Styles.socialSignup}>
                    <View style={Styles.icon}>
                         <ICONS.Fontisto 
@@ -45,11 +55,11 @@ const NeedySignup = ({navigation}) =>{
 
             <Text style={Styles.line2}>Or, register with email...</Text>
 
-            <RegForm name={name} setName={setName} address={address} 
-            setAddress={setAddress} email={email} setEmail={setEmail} 
-            cell={cell} setCell={setCell} handleReg={handleRegistration}/>
+            <RegForm name={name} setName={setName} email={email} setEmail={setEmail} 
+            cell={phone} setCell={setPhone} handleReg={handleRegistration} 
+            password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}/>
 
-            <TouchableOpacity style={Styles.regView} onPress={()=>navigation.navigate('donorsignup')}>
+            <TouchableOpacity style={Styles.regView} onPress={()=>props.navigation.navigate('donorsignup')}>
                         <Text style={Styles.reg}>Or, register as donor</Text>
                         <ICONS.AntDesign name="arrowright" style={Styles.icon2} size={18}/>
             </TouchableOpacity>
@@ -57,8 +67,12 @@ const NeedySignup = ({navigation}) =>{
         </KeyboardAvoidingView>
     )
 }
-
-export default NeedySignup
+const mapStateToProps=props=>{
+    return{
+        msg:props.auth.msg
+    }
+}
+export default connect(mapStateToProps,{RegisterNeedy})(NeedySignup)
 
 const Styles = StyleSheet.create({
     socialSignup:{

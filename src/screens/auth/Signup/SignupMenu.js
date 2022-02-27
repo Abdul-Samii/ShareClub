@@ -7,7 +7,7 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
 const Signup = ({navigation}) =>{
     return(
         <ScrollView style={{backgroundColor:'rgba(0,0,0,0.03)'}}>
-            <Header title="ShareClub" Goback={()=>navigation.goBack()} iconName="arrow-left"/>
+            <Header title="ShareClub"/>
             <Image source={IMAGES.wallpaper1} style={Styles.img}/>
             <View style={Styles.footer}>
                 <View>

@@ -10,6 +10,8 @@ import { Needy } from './screens/needy'
 import { NavigationContainer } from '@react-navigation/native'
 import AuthRoute from './routes/auth'
 import NeedyRoute from './routes/needy'
+import { Provider } from 'react-redux'
+import { Store } from './store/Store'
 
 
 const theme = {
@@ -29,10 +31,12 @@ const App = () => {
       <>
       <IconRegistry icons={EvaIconsPack}/>
       <ApplicationProvider {...eva} theme={eva.light}>
+        <Provider store={Store}>
         <PaperProvider theme={theme}>
         <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
             <NeedyRoute/>
         </PaperProvider>
+        </Provider>
       
       </ApplicationProvider>
       </>
