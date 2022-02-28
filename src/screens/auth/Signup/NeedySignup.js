@@ -1,10 +1,29 @@
 import React,{useState} from 'react'
-import {View, Text, StyleSheet,KeyboardAvoidingView,ScrollView,TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet,KeyboardAvoidingView,ScrollView,
+    TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
+import Wait from '../../../components/layout/Wait'
+import { Toast } from '../../../components/toast'
 import { ICONS, IMAGES,COLORS,wp,hp, FONTS } from '../../../constants'
 import { RegisterNeedy } from '../../../store/actions'
 import { Header, SubHeader } from '../components'
 import { RegForm } from './components'
+
+
+
+import {
+    ToastAndroid,
+    Platform,
+    AlertIOS,
+  } from 'react-native';
+
+function notifyMessage(msg) {
+if (Platform.OS === 'android') {
+  ToastAndroid.show(msg, ToastAndroid.SHORT)
+} else {
+  AlertIOS.alert(msg);
+}
+}
 
 const NeedySignup = (props) =>{
 
@@ -14,13 +33,32 @@ const NeedySignup = (props) =>{
     const [password,setPassword] = useState()
     const [confirmPassword,setConfirmPassword] = useState()
     
+
+
+    const StatesRemoving = ()=>
+    {
+        setName("")
+        setEmail("")
+        setPhone("")
+        setPassword("")
+        setConfirmPassword("")
+        props.msg=''
+    }
+
+
     const handleRegistration = async() =>{
         var obj;
-        !name&&!email&&!phone?alert("Fill all fields"):
+        !name&&!email&&!phone?notifyMessage("Fill all fields"):
             phone.length!=13?alert("Phone number length is invalid"):
              phone[0]!='+'&&phone[1]!='9'&&phone[2]!='2'? alert("Invalid phone number"):
                 password.length<8? alert("Password should be minimum 8 charactors"):
-                    password !== confirmPassword?alert("Password donot march!"):( obj={name,email,phone,password}, await props.RegisterNeedy(obj))
+                    password !== confirmPassword?alert("Password donot march!"):( obj={name,email,phone,password}, 
+                        await props.RegisterNeedy(obj),
+                        // setTimeout(function(){notifyMessage(props.msg)}, 3000),
+                        StatesRemoving()
+                        )
+                    
+
                             
                             
         
@@ -28,6 +66,8 @@ const NeedySignup = (props) =>{
     }
 
     return(
+        <>
+        {props.isLoading? <Wait/>:
         <KeyboardAvoidingView behavior='position'>
             <ScrollView>
             <Header img={IMAGES.d1}/>
@@ -65,11 +105,14 @@ const NeedySignup = (props) =>{
             </TouchableOpacity>
             </ScrollView>
         </KeyboardAvoidingView>
+}
+        </>
     )
 }
 const mapStateToProps=props=>{
     return{
-        msg:props.auth.msg
+        msg:props.auth.msg,
+        isLoading:props.auth.isLoading
     }
 }
 export default connect(mapStateToProps,{RegisterNeedy})(NeedySignup)

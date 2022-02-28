@@ -7,27 +7,27 @@ export const httpRequest = axios.create({
     baseURL:baseURL,
 });
 
-export const config={
-    Headers:{
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-}
+// export const config={
+//     Headers:{
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+// }
 
-export const mediaConfig = token=>{
-    const userToken = Store.getState()?.auth?.User?.Token || token;
-    return {
-        headers:{
-            Authorization:'Bearer' + userToken,
-        },
-    };
-};
+// export const mediaConfig = token=>{
+//     const userToken = Store.getState()?.auth?.User?.Token || token;
+//     return {
+//         headers:{
+//             Authorization:'Bearer' + userToken,
+//         },
+//     };
+// };
 
-export const getConfig = token=>{
-    const userToken = Store.getState()?.auth?.User?.Token || token;
-    return {
-        headers:{
-            'Content-Type' : 'application/json',
-            Authorization:'Bearer' + userToken,
-        },
-    };
-};
+// export const getConfig = token=>{
+//     const userToken = Store.getState()?.auth?.User?.Token || token;
+//     return {
+//         headers:{
+//             'Content-Type' : 'application/json',
+//             Authorization:'Bearer' + userToken,
+//         },
+//     };
+// };

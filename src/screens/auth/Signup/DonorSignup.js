@@ -3,25 +3,58 @@ import {View, Text, StyleSheet,KeyboardAvoidingView,ScrollView,TouchableOpacity}
 import { ICONS, IMAGES,COLORS,wp,hp, FONTS } from '../../../constants'
 import { Header, SubHeader } from '../components'
 import { RegForm } from './components'
+import { RegisterDonor } from '../../../store/actions'
+import { connect } from 'react-redux'
+import Wait from '../../../components/layout/Wait'
 
-const DonorSignup = ({navigation}) =>{
+const DonorSignup = (props) =>{
 
     const [name,setName] = useState()
-    const [address,setAddress] = useState()
     const [email,setEmail] = useState()
-    const [cell,setCell] = useState()
+    const [phone,setPhone] = useState("")
+    const [password,setPassword] = useState()
+    const [confirmPassword,setConfirmPassword] = useState()
+    
 
-    const handleRegistration = () =>{
-        name&&address&&email&&cell?
-                alert("Registration successfull")
-        :       alert("Fill all fields")
+    
+    const StatesRemoving = ()=>
+    {
+        setName("")
+        setEmail("")
+        setPhone("")
+        setPassword("")
+        setConfirmPassword("")
+        props.msg=''
     }
 
+
+    const handleRegistration = async() =>{
+        var obj;
+        !name&&!email&&!phone?notifyMessage("Fill all fields"):
+            phone.length!=13?alert("Phone number length is invalid"):
+             phone[0]!='+'&&phone[1]!='9'&&phone[2]!='2'? alert("Invalid phone number"):
+                password.length<8? alert("Password should be minimum 8 charactors"):
+                    password !== confirmPassword?alert("Password donot march!"):( obj={name,email,phone,password}, 
+                        await props.RegisterDonor(obj),
+                        // setTimeout(function(){notifyMessage(props.msg)}, 3000),
+                        StatesRemoving()
+                        )
+                    
+
+                            
+                            
+        
+        
+    }
+
+
     return(
+        <>
+        {props.isLoading? <Wait/>:
         <KeyboardAvoidingView behavior='position'>
             <ScrollView>
             <Header img={IMAGES.d2}/>
-            <SubHeader title="Register as donor" Goback={()=>navigation.goBack()}/>
+            <SubHeader title="Register as donor" Goback={()=>props.navigation.goBack()}/>
             <View style={Styles.socialSignup}>
                    <View style={Styles.icon}>
                         <ICONS.Fontisto 
@@ -45,21 +78,28 @@ const DonorSignup = ({navigation}) =>{
 
             <Text style={Styles.line2}>Or, register with email...</Text>
 
-            <RegForm name={name} setName={setName} address={address} 
-            setAddress={setAddress} email={email} setEmail={setEmail} 
-            cell={cell} setCell={setCell} handleReg={handleRegistration}/>
+            <RegForm name={name} setName={setName} email={email} setEmail={setEmail} 
+            cell={phone} setCell={setPhone} handleReg={handleRegistration} 
+            password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}/>
 
-            <TouchableOpacity style={Styles.regView} onPress={()=>navigation.navigate('needysignup')}>
+            <TouchableOpacity style={Styles.regView} onPress={()=>props.navigation.navigate('needysignup')}>
                         <Text style={Styles.reg}>Or, register as needy</Text>
                         <ICONS.AntDesign name="arrowright" style={Styles.icon2} size={18}/>
             </TouchableOpacity>
         </ScrollView>
         </KeyboardAvoidingView>
+}
+    </>
     )
 }
 
-export default DonorSignup
-
+const mapStateToProps=props=>{
+    return{
+        msg:props.auth.msg,
+        isLoading:props.auth.isLoading
+    }
+}
+export default connect(mapStateToProps,{RegisterDonor})(DonorSignup)
 const Styles = StyleSheet.create({
     socialSignup:{
         flexDirection:'row',
