@@ -1,17 +1,21 @@
-import React,{useState} from 'react'
+import AsyncStorage from '@react-native-community/async-storage'
+import React,{useState,useEffect} from 'react'
 import {View, Text, StyleSheet,Image,FlatList} from 'react-native'
+import { connect } from 'react-redux'
 import { Header } from '../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
+import { GetNeedy } from '../../../store/actions/NeedyAction'
 
 
 
 
-
-const NeedyProfile=()=>{
-    const [name,setName] = useState("Abdul Sami")
-    const [profession,setProfession] = useState("Student")
-    const [cell,setCell] = useState("+923181529339")
-    const [email, setEmail] = useState("ksamk100474@gmail.com")
+const NeedyProfile=(props)=>{
+    const [name,setName] = useState("")
+    const [profession,setProfession] = useState("student")
+    const [cell,setCell] = useState("")
+    const [email, setEmail] = useState("")
+    const [donationAccepted,setDonationAccepted] = useState()
+    const [donationPending,setDonationPending] = useState()
 
     const list=[
         {name:'Address', icon:'location-city'},
@@ -21,6 +25,27 @@ const NeedyProfile=()=>{
         {name:'Settings', icon:'settings'},
         {name:'Logout', icon:'logout'},
     ]
+
+
+    const setNeedyData=()=>{
+        setName(props.needy.name)
+        setCell(props.needy.phone)
+        setEmail(props.needy.email)
+        setDonationAccepted(props.needy.acceptedAds?props.needy.acceptedAds.length:"Loading...")
+        setDonationPending(props.needy.currentAds?props.needy.currentAds.length:"Loading...")
+    }
+    const getNeedyData=async()=>{
+        needyId = await AsyncStorage.getItem('userId')
+        const obj={
+            needyId
+        }
+        await props.GetNeedy(obj)
+        setNeedyData()
+    }
+
+    useEffect(()=>{
+        getNeedyData()
+    },[30]);
 
 
     const handleFlatlist=(item)=>{
@@ -49,8 +74,8 @@ const NeedyProfile=()=>{
                 <View style={Styles.top}>
                     <Image source={IMAGES.user} style={Styles.img}/>
                     <View style={Styles.nameDesc}>
-                        <Text style={Styles.name}>{name}</Text>
-                        <Text>{profession}</Text>
+                        <Text style={Styles.name}>{name?name:"Loading..."}</Text>
+                        <Text>{profession?profession:"Loading..."}</Text>
                     </View>
                 </View>
                 <ICONS.Feather name="edit" size={17} 
@@ -62,23 +87,23 @@ const NeedyProfile=()=>{
 
         <View style={Styles.flex}>
             <ICONS.FontAwesome name="phone" size={17}/>
-            <Text style={Styles.itemName}>{cell}</Text>
+            <Text style={Styles.itemName}>{cell?cell:"Loading..."}</Text>
         </View>
 
         <View style={Styles.flex}>
             <ICONS.Fontisto name="email" size={17}/>
-            <Text style={Styles.itemName}>{email}</Text>
+            <Text style={Styles.itemName}>{email?email:"Loading..."}</Text>
         </View>
     </View>
 
 
     <View style={Styles.flex}>
         <View style={Styles.stat}>
-            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>23</Text>
+            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>{donationAccepted}</Text>
             <Text style={{color:COLORS.gray2}}>Donations Accepted</Text>
         </View>
         <View style={Styles.stat}>
-            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>3</Text>
+            <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>{donationPending}</Text>
             <Text style={{color:COLORS.gray2}}>Donations Pending</Text>
         </View>
     </View>
@@ -94,7 +119,14 @@ const NeedyProfile=()=>{
         </View>
     )
 }
-export default NeedyProfile
+const mapStateToProps=props=>{
+    return{
+        isLoading:props.auth.isLoading,
+        needy:props.needy.needyProfile
+    }
+}
+
+export default connect(mapStateToProps,{GetNeedy})(NeedyProfile)
 
 const Styles = StyleSheet.create({
     top:{

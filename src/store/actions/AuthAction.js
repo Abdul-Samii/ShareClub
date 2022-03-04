@@ -2,8 +2,7 @@ import {types} from '../actionTypes';
 import {httpRequest} from '../../config';
 import qs from 'qs';
 import { setToast } from '.';
-
-
+import AsyncStorage from '@react-native-community/async-storage';
 import {
     ToastAndroid,
     Platform,
@@ -62,16 +61,19 @@ export const RegisterDonor = (data) => async dispatch=>{
 
 //Login
 export const LoginUser = (data) => async dispatch=>{
-    console.log("1")
     try{
         dispatch({type:types.LOGIN_START});
         let queryData = qs.stringify(data);
-        console.log("2")
         const response = await httpRequest.post('/auth/login',queryData);
         const result = response.data;
-        dispatch({type:types.LOGIN_SUCCESS});
+        dispatch({type:types.LOGIN_SUCCESS,payload:result.msg});
         notifyMessage(result.msg)
-        console.log(result.token)
+        // console.log(result.token)
+        await AsyncStorage.setItem('item',result.token);
+        await AsyncStorage.setItem('userId',result.userId)
+        dispatch(setToast('info','A verification link has sent to your account, Please verify to continue'))
+
+        
 
     }
     catch(err)

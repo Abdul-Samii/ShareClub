@@ -1,10 +1,15 @@
-import React from 'react'
+import AsyncStorage from '@react-native-community/async-storage'
+import React, { useEffect } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native'
+import { connect } from 'react-redux'
 import { Card3 } from '../../..'
 import { Header } from '../../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants'
+import { ViewNearbyAds } from '../../../../store/actions'
 
-const SearchNearby = ({navigation}) =>{
+
+
+const SearchNearby = (props) =>{
     const adsList = [
         {name:"Sports Shoes", category:"Shoes", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
         {name:"Jeans Pent", category:"Cloths", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
@@ -19,6 +24,18 @@ const SearchNearby = ({navigation}) =>{
         {name:"Books of 5th class", category:"Books", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
     ]
 
+
+    const getDonationAds = async()=>{
+        const userId = await AsyncStorage.getItem('userId');
+        const obj = {
+            userId
+        }
+        await props.ViewNearbyAds(userId)
+    }
+    useEffect(()=>{
+        getDonationAds()
+    },[5])
+
     const handleFlatList = (item) =>{
         return(
             <TouchableOpacity style={Styles.card}>
@@ -29,7 +46,7 @@ const SearchNearby = ({navigation}) =>{
 
     return(
         <View style={Styles.container}>
-            <Header title="Nearby Donation Ads" iconName="arrow-left" iconRight="bell" Goback={()=>navigation.goBack()}/>
+            <Header title="Nearby Donation Ads" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
                 <FlatList
                     data={adsList}
                     keyExtractor={(item)=>item.name}
@@ -39,7 +56,14 @@ const SearchNearby = ({navigation}) =>{
         </View>
     )
 }
-export default SearchNearby
+
+const mapStateToProps=props=>{
+    return{
+        donationAds:props.needy.donationAds,
+        msg:props.needy.msg
+    }
+}
+export default connect(mapStateToProps,{ViewNearbyAds})(SearchNearby)
 
 const Styles = StyleSheet.create({
     container:{

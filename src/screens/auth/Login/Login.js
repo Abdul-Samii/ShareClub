@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage'
 import React,{useState} from 'react'
 import {View, Text, StyleSheet, Image,KeyboardAvoidingView} from 'react-native'
 import { RadioButton } from 'react-native-paper'
@@ -15,6 +16,7 @@ const Login = (props) => {
     const [email,setEmail] = useState()
     const [password,setPassword] = useState()
     const [type,setType] = useState('needy');
+    const [userId,setUserId] = useState();
 
     const StatesRemoving = ()=>
     {
@@ -22,22 +24,24 @@ const Login = (props) => {
         setPassword("")
         setType("needy")
     }
-
-
+    
     const handleLogin = async() =>{
         var obj;
+        var user;
         !email&&!password?alert("Fill all fields"):
             
             password.length<8? alert("Password should be minimum 8 charactors"):
                    ( obj={email,password,type}, 
                         await props.LoginUser(obj),
-                        // setTimeout(function(){notifyMessage(props.msg)}, 3000),
-                        StatesRemoving()
-                        )
-        
+                        StatesRemoving(),
+                         user = await AsyncStorage.getItem('userId'),
+                         console.log("Checking ----> ",user),
+                        setUserId(user),
+                         user&&props.navigation.navigate('needy')
+                    )
     }
 
-
+// console.log(props.msg)
     return(
         <>
         {props.isLoading?<Wait/>:
@@ -127,7 +131,8 @@ const Login = (props) => {
 
 const mapStateToProps=props=>{
     return{
-        isLoading:props.auth.isLoading
+        isLoading:props.auth.isLoading,
+        msg:props.auth.msg
     }
 }
 
