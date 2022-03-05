@@ -1,4 +1,4 @@
-import {BookedDonations, ChangePassword, ChatHome, DonorSignup, ForgotPassword, Login, ManageDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, NewPassword, Notification, ResetCode, SearchNearby, Signup} from '../../screens'
+import {BookedDonations, ChangeName, ChangePassword, ChatHome, DonorSignup, ForgotPassword, Help, Login, ManageDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, NewPassword, Notification, ResetCode, SearchNearby, Signup} from '../../screens'
 // export const initialRouteName = 'splash';
 // export const initialRouteName = 'login';  //for sample test right now I set the initialRoute to login
 
@@ -32,9 +32,9 @@ export const RouteList = [
   {name:'searchnearby',component:SearchNearby},
   {name:'bookeddonations',component:BookedDonations},
 
-  {name:'changepassword',component:ChangePassword}
-  
-
+  {name:'changepassword',component:ChangePassword},
+  {name:'changename',component:ChangeName},
+  {name:'help',component:Help},
     
   
 ];

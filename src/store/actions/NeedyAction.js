@@ -58,3 +58,28 @@ export const ViewNearbyAds = (data) => async dispatch=>{
     dispatch({type:types.VIEW_NEARBY_ADS_FAILED});
   }
 }
+
+
+//View Booked Ads
+export const ViewBookedAds = (data) => async dispatch=>{
+  var response;
+  try{
+      dispatch({type:types.VIEW_BOOKEDADS_START});
+      let queryData = qs.stringify(data)
+      console.log("Testing pass ",data)
+
+       response = await httpRequest.get('needy/bookeddonations',{
+        params:{
+          userId:data
+        }
+      });
+      const result = response.data;
+      console.log("Results ---------- ",result);
+      dispatch({type:types.VIEW_BOOKEDADS_SUCCESS,payload:result});
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    dispatch({type:types.VIEW_BOOKEDADS_FAILED,payload:response.data});
+  }
+}

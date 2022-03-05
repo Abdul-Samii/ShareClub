@@ -39,7 +39,7 @@ const SearchNearby = (props) =>{
     const handleFlatList = (item) =>{
         return(
             <TouchableOpacity style={Styles.card}>
-                <Card3 name={item.name} category={item.category} address={item.address} img={item.img} time={item.time}/>
+                <Card3 name={item.title} category={item.category[0]} address={item.address} img={item.images[0]} time={item.createdAt}/>
             </TouchableOpacity>
         )
     }
@@ -47,12 +47,20 @@ const SearchNearby = (props) =>{
     return(
         <View style={Styles.container}>
             <Header title="Nearby Donation Ads" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
-                <FlatList
-                    data={adsList}
-                    keyExtractor={(item)=>item.name}
-                    renderItem={(data)=>handleFlatList(data.item)}
-                    showsVerticalScrollIndicator={false}
-                />
+            {props.msg === 'Add your city to search'?(
+                <View>
+                        <Text>Please Add your city to search...</Text>
+                </View>
+            ):(
+            <FlatList   
+                data={props.donationAds}
+                keyExtractor={(item)=>item.name}  
+                renderItem={(data)=>handleFlatList(data.item)}
+                showsVerticalScrollIndicator={false}
+            />
+            )
+             
+            }
         </View>
     )
 }

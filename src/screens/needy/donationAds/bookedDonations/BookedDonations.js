@@ -1,34 +1,51 @@
-import React from 'react'
+import AsyncStorage from '@react-native-community/async-storage';
+import React,{useEffect} from 'react'
 import {View, Text, StyleSheet,TouchableOpacity, Image} from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
+import { connect } from 'react-redux';
 import { Header } from '../../../../components';
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants';
+import { ViewBookedAds } from '../../../../store/actions';
 
-const BookedDonations = ({navigation}) =>{
-    const bookedItems=[
-        {itemName : 'Shoes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Books', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Clothes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Bag', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Food', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Blanket', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Bottle', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-        {itemName : 'Comb', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'}
-    ]
+const BookedDonations = (props) =>{
+    // const bookedItems=[
+    //     {itemName : 'Shoes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Books', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Clothes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Bag', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Food', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Blanket', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Bottle', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
+    //     {itemName : 'Comb', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'}
+    // ]
+    const bookedItems = props.donationAds.currentAds;
+
+
+    const getBookedAds = async()=>{
+        const userId = await AsyncStorage.getItem('userId');
+        const obj = {
+            userId
+        }
+        await props.ViewBookedAds(userId)
+    }
+    useEffect(()=>{
+        getBookedAds()
+    },[5])
 
 
 
     const handleFlatList=(item)=>{
+
         return(
             <TouchableOpacity>
             <View style={Styles.item}>
-                <View style={Styles.elevation}><Image source={IMAGES.user} style={Styles.img}/></View> 
+                <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
                 <View style={Styles.ItemBack}>
                     <View style={{flexDirection:'row'}}>
                         <View style={Styles.detail}>
-                            <Text style={Styles.itemName}>Item : {item.itemName}</Text>
-                            <Text style={Styles.quantity}>Quantity : {item.quantity}</Text>
+                            <Text style={Styles.itemName}>Item : {item.title}</Text>
+                            <Text style={Styles.quantity}>Category : {item.category}</Text>
                             <Text style={Styles.address}>Address : {item.address}</Text>
                         </View>
                         <View style={{marginTop:hp(3),marginLeft:wp(7)}}>
@@ -44,12 +61,12 @@ const BookedDonations = ({navigation}) =>{
 
     return(
         <View style={Styles.container}>
-            <Header title="Booked donations" iconName="arrow-left" iconRight="bell" Goback={()=>navigation.goBack()}/>
+            <Header title="Booked donations" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
             <Searchbar style={Styles.searchbar}/>
 
             <FlatList
                 data={bookedItems}
-                keyExtractor={(item)=>item.itemName}
+                keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
             />
@@ -58,7 +75,13 @@ const BookedDonations = ({navigation}) =>{
     )
 }
 
-export default BookedDonations;
+const mapStateToProps=props=>{
+    return{
+        donationAds:props.needy.donationAds,
+        msg:props.needy.msg
+    }
+}
+export default connect(mapStateToProps,{ViewBookedAds})(BookedDonations)
 
 const Styles = StyleSheet.create({
     container:{

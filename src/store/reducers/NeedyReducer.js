@@ -19,8 +19,15 @@ export const NeedyReducer = (state=initialState,{type,payload})=>{
         case types.VIEW_NEARBY_ADS_START:
             return {...state, isLoading:true}
         case types.VIEW_NEARBY_ADS_SUCCESS:
-            return {...state, donationAds:payload.donations,msg:payload.msg}
+            return {...state,isLoading:false, donationAds:payload.donations,msg:payload.msg}
         case types.VIEW_NEARBY_ADS_FAILED:
+            return {...state, isLoading:false}
+
+        case types.VIEW_BOOKEDADS_START:
+            return {...state, isLoading:true}
+        case types.VIEW_BOOKEDADS_SUCCESS:
+            return {...state,isLoading:false, donationAds:payload.donations,msg:payload.msg}
+        case types.VIEW_BOOKEDADS_FAILED:
             return {...state, isLoading:false}
         
         

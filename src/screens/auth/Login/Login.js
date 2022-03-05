@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Button } from '../../../components/form'
 import FormInput from '../../../components/form/FormInput'
 import Wait from '../../../components/layout/Wait'
+import { NotifyMessage } from '../../../components/toast'
 import { COLORS, FONTS, hp, ICONS, IMAGES, wp } from '../../../constants'
 import { LoginUser } from '../../../store/actions'
 import { Header } from '../components'
@@ -35,9 +36,8 @@ const Login = (props) => {
                         await props.LoginUser(obj),
                         StatesRemoving(),
                          user = await AsyncStorage.getItem('userId'),
-                         console.log("Checking ----> ",user),
                         setUserId(user),
-                         user&&props.navigation.navigate('needy')
+                         userId&&props.navigation.navigate('needy')
                     )
     }
 
@@ -45,8 +45,8 @@ const Login = (props) => {
     return(
         <>
         {props.isLoading?<Wait/>:
+        
         <KeyboardAvoidingView behavior='position'>
-
             <Header img={IMAGES.loginHeader}/>
             <View style={Styles.content}>
                 <View style={Styles.heading}>
@@ -60,7 +60,6 @@ const Login = (props) => {
                     value={email}
                     onChangeText={(item)=>{setEmail(item)}}
                 />
-
                 <FormInput
                     placeholder="Password"
                     style={{...Styles.inputField,marginTop:hp(1)}}

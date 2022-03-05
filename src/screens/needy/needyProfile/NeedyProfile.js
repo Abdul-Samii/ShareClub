@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import React,{useState,useEffect} from 'react'
-import {View, Text, StyleSheet,Image,FlatList} from 'react-native'
+import {View, Text, StyleSheet,Image,FlatList, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import { Header } from '../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
@@ -18,12 +18,12 @@ const NeedyProfile=(props)=>{
     const [donationPending,setDonationPending] = useState()
 
     const list=[
-        {name:'Address', icon:'location-city'},
-        {name:'Change Password', icon:'vpn-key'},
-        {name:'Help', icon:'live-help'},
-        {name:'Share',icon:'share'},
-        {name:'Settings', icon:'settings'},
-        {name:'Logout', icon:'logout'},
+        {name:'Address', icon:'location-city',nav:'changepassword'},
+        {name:'Change Password', icon:'vpn-key',nav:'changepassword'},
+        {name:'Help', icon:'live-help',nav:'help'},
+        {name:'Share',icon:'share',nav:'changepassword'},
+        {name:'Settings', icon:'settings',nav:'changepassword'},
+        {name:'Logout', icon:'logout',nav:'changepassword'},
     ]
 
 
@@ -57,10 +57,10 @@ const NeedyProfile=(props)=>{
                     opacity:0.1
                 }}
             />
-            <View style={Styles.flex}>
+            <TouchableOpacity style={Styles.flex} onPress={()=>props.navigation.navigate(item.nav)}>
                 <ICONS.MaterialIcons name={item.icon} size={17}/>
                 <Text style={Styles.itemName}>{item.name}</Text>
-            </View>
+            </TouchableOpacity>
 
     </View>
 
@@ -78,9 +78,11 @@ const NeedyProfile=(props)=>{
                         <Text>{profession?profession:"Loading..."}</Text>
                     </View>
                 </View>
-                <ICONS.Feather name="edit" size={17} 
-                    style={{position:'absolute',marginLeft:wp(65),marginTop:hp(3.5)}}
-                />
+
+                <TouchableOpacity style={{position:'absolute',marginLeft:wp(65),marginTop:hp(3.5)}} 
+                    onPress={()=>props.navigation.navigate('changename')}>
+                    <ICONS.Feather name="edit" size={17}/>
+                </TouchableOpacity>
             </View>
 
      <View style={Styles.contactDetail}>
