@@ -23,7 +23,7 @@ const NeedyProfile=(props)=>{
         {name:'Help', icon:'live-help',nav:'help'},
         {name:'Share',icon:'share',nav:'changepassword'},
         {name:'Settings', icon:'settings',nav:'changepassword'},
-        {name:'Logout', icon:'logout',nav:'changepassword'},
+        {name:'Logout', icon:'logout',nav:'logout'},
     ]
 
 
