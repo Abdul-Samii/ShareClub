@@ -44,3 +44,45 @@ export const UpdateName = (data) => async dispatch=>{
         dispatch({type:types.UPDATE_PASSWORD_FAILED});
     }
 }
+
+
+//Update Private Mode
+export const UpdatePrivateMode = (data) => async dispatch=>{
+    var result;
+    try{
+        dispatch({type:types.UPDATE_PRIVATE_START});
+        let queryData = qs.stringify(data);
+        const response = await httpRequest.post('/update/privatemode',queryData);
+        result = response.data;
+        dispatch({type:types.UPDATE_PRIVATE_START,payload:result});
+        NotifyMessage(result.msg);
+
+    }
+    catch(err)
+    {
+        console.log("Error in input : -------------------------------------------------------------",err);
+        NotifyMessage(result.msg);
+        dispatch({type:types.UPDATE_PRIVATE_FAILED});
+    }
+}
+
+
+//Update Messages Mode
+export const UpdateMessagesMode = (data) => async dispatch=>{
+    var result;
+    try{
+        dispatch({type:types.UPDATE_MESSAGES_START});
+        let queryData = qs.stringify(data);
+        const response = await httpRequest.post('/update/messagesmode',queryData);
+        result = response.data;
+        dispatch({type:types.UPDATE_MESSAGES_SUCCESS,payload:result});
+        NotifyMessage(result.msg);
+
+    }
+    catch(err)
+    {
+        console.log("Error in input : -------------------------------------------------------------",err);
+        NotifyMessage(result.msg);
+        dispatch({type:types.UPDATE_MESSAGES_FAILED});
+    }
+}

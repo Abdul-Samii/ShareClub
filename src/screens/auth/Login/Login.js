@@ -36,8 +36,9 @@ const Login = (props) => {
                         await props.LoginUser(obj),
                         StatesRemoving(),
                          user = await AsyncStorage.getItem('userId'),
-                        setUserId(user),
-                         userId&&props.navigation.navigate('needy')
+                        
+                        user?props.navigation.navigate('needy'):console.clear()
+                         
                     )
     }
 

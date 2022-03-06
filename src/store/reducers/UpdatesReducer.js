@@ -21,8 +21,21 @@ export const UpdatesReducer = (state=initialState,{type,payload})=>{
             return {...state,isLoading:false, msg:payload.msg}
         case types.UPDATE_NAME_FAILED:
             return {...state, isLoading:false}
-        
 
+
+        case types.UPDATE_PRIVATE_START:
+            return {...state, isLoading:true}
+        case types.UPDATE_PRIVATE_SUCCESS:
+            return {...state,isLoading:false, msg:payload.msg}
+        case types.UPDATE_PRIVATE_FAILED:
+            return {...state, isLoading:false}
+        
+        case types.UPDATE_MESSAGES_START:
+            return {...state, isLoading:true}
+        case types.UPDATE_MESSAGES_SUCCESS:
+            return {...state,isLoading:false, msg:payload.msg}
+        case types.UPDATE_MESSAGES_FAILED:
+            return {...state, isLoading:false}
 
         default:
             return state; 
