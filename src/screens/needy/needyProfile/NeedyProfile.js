@@ -18,7 +18,7 @@ const NeedyProfile=(props)=>{
     const [donationPending,setDonationPending] = useState()
 
     const list=[
-        {name:'Address', icon:'location-city',nav:'changepassword'},
+        {name:'Address', icon:'location-city',nav:'address'},
         {name:'Change Password', icon:'vpn-key',nav:'changepassword'},
         {name:'Help', icon:'live-help',nav:'help'},
         {name:'Share',icon:'share',nav:'changepassword'},
