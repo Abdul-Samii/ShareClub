@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import {View, Text, StyleSheet, TouchableOpacity, TextInput,Picker} from 'react-native'
 import { Header } from '../../../components'
 import { COLORS, hp, ICONS, wp } from '../../../constants'
+import RNPickerSelect from 'react-native-picker-select'
 
 const Address = () =>{
     const [cityEdit,setCityEdit] = useState(false)
@@ -12,21 +13,82 @@ const Address = () =>{
     const [country,setCountry] = useState("Pakistan")
     const [address,setAddress] = useState("DHA,house#01")
     
-//     fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
-// 	"method": "POST",
-//     headers: {
-//         'Accept': 'application/json, text/plain, */*',
-//         'Content-Type': 'application/json'
-//       },
-//     body:JSON.stringify({country:"pakistan",state:"punjab"})
-// })
-// .then(function(res){ return res.json(); })
-// .then(function(data){ alert( JSON.stringify( data ) ) })
-// .catch(err => {
-// 	console.error(err);
-// });
+    const [allCountries,setAllCountries] = useState(["pakistan","india"])
+    const [allStates,setAllStates] = useState(["pakistan","india"])
+    const [allCities,setAllCities] = useState([])
+    const [pickerList,setPickerList] = useState([])
+    
 
-    return(
+
+const fetchCountries=async()=>{
+    await fetch("https://countriesnow.space/api/v0.1/countries/capital", {
+        "method": "GET",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        }
+        // body:JSON.stringify({country:"pakistan",state:"Khyber Pakhtunkhwa"})
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(item){ setAllCountries(item.data) })
+    .catch(err => {
+        console.error(err);
+    });
+}
+
+const fetchStates=async()=>{
+    await fetch("https://countriesnow.space/api/v0.1/countries/states", {
+        "method": "POST",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({country:"pakistan"})
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(item){ setAllStates(item.data) })
+    .catch(err => {
+        console.error(err);
+    });
+    console.log(allStates)
+}
+
+
+const fetchCities=async()=>{
+    await fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+        "method": "POST",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({country:"pakistan",state:"Khyber Pakhtunkhwa"})
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(item){ setAllCities(item.data) })
+    .catch(err => {
+        console.error(err);
+    });
+}
+
+const setCountries1=()=>{
+    var myMap = [];
+    allCountries.map((item,index)=>{
+   myMap.push({"label":item.name,"value":item.name})
+   
+})
+setPickerList(myMap)
+}
+
+
+
+useEffect(()=>{
+    
+    fetchCountries()
+    setCountries1()
+    fetchStates()
+    fetchCities()
+},[])
+return(
         <View style={Styles.container}>
             <Header title="Address" iconName="arrow-left" Goback={()=>props.navigation.goBack()}/>
            
@@ -54,16 +116,10 @@ const Address = () =>{
             <View style={Styles.row}>
                 <View>
                     <Text style={Styles.heading}>Country</Text>
-                    {
-                        countryEdit?
-                        <TextInput
-                            value={city}
-                            onChangeText={(item)=>setCity(item)}
-                            style={Styles.editField}
-                        />
-                        :
-                        <Text style={Styles.details}>{country}</Text>
-                    }
+                    <RNPickerSelect
+                        onValueChange={(value) => setCountry(value)}
+                        items={pickerList}
+                    />
                 </View>
             </View>
 
