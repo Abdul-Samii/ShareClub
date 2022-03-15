@@ -86,3 +86,25 @@ export const UpdateMessagesMode = (data) => async dispatch=>{
         dispatch({type:types.UPDATE_MESSAGES_FAILED});
     }
 }
+
+
+
+//Update Address
+export const UpdateAddress = (data) => async dispatch=>{
+    var result;
+    try{
+        dispatch({type:types.UPDATE_ADDRESS_START});
+        let queryData = qs.stringify(data);
+        const response = await httpRequest.post('/update/address',queryData);
+        result = response.data;
+        dispatch({type:types.UPDATE_ADDRESS_SUCCESS,payload:result});
+        NotifyMessage(result.msg);
+
+    }
+    catch(err)
+    {
+        console.log("Error in input : -------------------------------------------------------------",err);
+        NotifyMessage(result.msg);
+        dispatch({type:types.UPDATE_ADDRESS_FAILED});
+    }
+}
