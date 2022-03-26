@@ -19,8 +19,7 @@ const BookedDonations = (props) =>{
     //     {itemName : 'Bottle', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
     //     {itemName : 'Comb', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'}
     // ]
-    const bookedItems = props.donationAds.currentAds;
-
+    // const bookedItems = props.donationAds.currentAds;
 
     const getBookedAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
@@ -31,12 +30,12 @@ const BookedDonations = (props) =>{
     }
     useEffect(()=>{
         getBookedAds()
-    },[5])
+    },[])
 
 
 
     const handleFlatList=(item)=>{
-
+console.log("DUCK ",item)
         return(
             <TouchableOpacity>
             <View style={Styles.item}>
@@ -65,7 +64,7 @@ const BookedDonations = (props) =>{
             <Searchbar style={Styles.searchbar}/>
 
             <FlatList
-                data={bookedItems}
+                data={props.donationAds.currentAds}
                 keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
@@ -110,7 +109,8 @@ const Styles = StyleSheet.create({
     item:{
         marginTop:hp(4),
         width:wp(90),
-        marginLeft:wp(2)
+        marginLeft:wp(2),
+        paddingBottom:5,
     },
     ItemBack:{
         backgroundColor:'white',

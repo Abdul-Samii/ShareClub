@@ -3,10 +3,10 @@ import {View , Text, StyleSheet, TouchableOpacity,Image} from 'react-native'
 import { COLORS, FONTS, hp, IMAGES, wp } from '../../constants'
 
 
-const Card1 = ({img,cardText,number}) =>{
+const Card1 = ({img,cardText,number,onPress}) =>{
     return(
         <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onPress}>
                 <View style={Styles.cardOut} >
                     <Image source={img}  style={Styles.dash1}/>
                 <View style={Styles.textView}>

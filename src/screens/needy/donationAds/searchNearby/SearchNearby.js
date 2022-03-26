@@ -47,9 +47,16 @@ const SearchNearby = (props) =>{
     return(
         <View style={Styles.container}>
             <Header title="Nearby Donation Ads" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
-            {props.msg === 'Add your city to search'?(
-                <View>
-                        <Text>Please Add your city to search...</Text>
+            {/* {
+                props.msg === 'No Donation ad availible in your region'&& (
+                    <View >
+                            <Text>No Donation Ad availible in your</Text>
+                    </View>
+                )
+            } */}
+            {props.msg !== 'showing nearby ads'?(
+                <View style={Styles.NoAdMsg}>
+                        <Text style={Styles.NoAdMsgText}>{props.msg}</Text>
                 </View>
             ):(
             <FlatList   
@@ -59,8 +66,10 @@ const SearchNearby = (props) =>{
                 showsVerticalScrollIndicator={false}
             />
             )
-             
+            
             }
+
+            
         </View>
     )
 }
@@ -80,5 +89,12 @@ const Styles = StyleSheet.create({
     },
    card:{
        marginTop:hp(2)
+   },
+   NoAdMsg:{
+       marginTop:hp(35),
+       marginLeft:wp(8)
+   },
+   NoAdMsgText:{
+       fontSize:18
    }
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {View, Text, StyleSheet, TextInput, ScrollView, Alert,} from 'react-native'
 import { Header } from '../../../components'
 import { COLORS, hp, IMAGES, wp } from '../../../constants'
@@ -6,7 +6,24 @@ import { Card,Paragraph, Title } from 'react-native-paper'
 import { Button } from '../../../components/form'
 import { Categories, Statistics, TTabs } from './components'
 import { Card1 } from '../..'
-const NeedyDashboard = ({navigation}) =>{
+import { connect } from 'react-redux'
+import { ViewBookedAds } from '../../../store/actions'
+import AsyncStorage from '@react-native-community/async-storage'
+const NeedyDashboard = (props) =>{
+
+
+
+    const getBookedAds = async()=>{
+        const userId = await AsyncStorage.getItem('userId');
+        const obj = {
+            userId
+        }
+        await props.ViewBookedAds(userId)
+    }
+    useEffect(()=>{
+        getBookedAds()
+    },[])
+
 
     return(
         <ScrollView>
@@ -24,7 +41,7 @@ const NeedyDashboard = ({navigation}) =>{
                             <Button title="Start Now"
                                 btnStyle={Styles.btnTop}
                                 btnTextStyle={{color:'black'}}
-                                onPress={()=>alert("You Press Start Now")}
+                                onPress={()=>props.navigation.navigate('searchnearby')}
                             />
                         </View>
                     </View>
@@ -41,8 +58,11 @@ const NeedyDashboard = ({navigation}) =>{
 
         
     
-    <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" number={10}/>
-    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number={10}/>
+    <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" 
+    onPress={()=>props.navigation.navigate('bookeddonations')}
+
+    number={props.donationAds.currentAds?props.donationAds.currentAds.length:"loading..."}/>
+    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number={props.donationAds.acceptedAds?props.donationAds.acceptedAds.length:"loading..."}/>
     <Card1 img={IMAGES.dashboard3} cardText="Donations Rejected" number={10}/>        
 
 
@@ -50,7 +70,15 @@ const NeedyDashboard = ({navigation}) =>{
     )
 }
 
-export default NeedyDashboard
+
+const mapStateToProps=props=>{
+    return{
+        donationAds:props.needy.donationAds,
+        msg:props.needy.msg
+    }
+}
+export default connect(mapStateToProps,{ViewBookedAds})(NeedyDashboard)
+
 
 const Styles = StyleSheet.create({
     search:{
