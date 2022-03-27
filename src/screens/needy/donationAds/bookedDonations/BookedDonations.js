@@ -35,8 +35,7 @@ const BookedDonations = (props) =>{
 
 
     const handleFlatList=(item)=>{
-console.log("DUCK ",item)
-        return(
+            return(
             <TouchableOpacity>
             <View style={Styles.item}>
                 <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
@@ -44,7 +43,7 @@ console.log("DUCK ",item)
                     <View style={{flexDirection:'row'}}>
                         <View style={Styles.detail}>
                             <Text style={Styles.itemName}>Item : {item.title}</Text>
-                            <Text style={Styles.quantity}>Category : {item.category}</Text>
+                            <Text style={Styles.quantity}>Category : {item.category.name}</Text>
                             <Text style={Styles.address}>Address : {item.address}</Text>
                         </View>
                         <View style={{marginTop:hp(3),marginLeft:wp(7)}}>
@@ -56,6 +55,7 @@ console.log("DUCK ",item)
             </View>
             </TouchableOpacity>
         )
+    
     }
 
     return(

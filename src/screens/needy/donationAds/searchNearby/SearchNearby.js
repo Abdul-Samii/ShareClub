@@ -37,11 +37,28 @@ const SearchNearby = (props) =>{
     },[5])
 
     const handleFlatList = (item) =>{
+        if(props.route.params)
+        {
+            if(props.route.params.category == item.category.name)
+            {
+            return(
+                <TouchableOpacity style={Styles.card}>
+                    <Card3 name={item.title} category={item.category.name} address={item.address} 
+                    img={item.images[0]} time={item.createdAt}/>
+                </TouchableOpacity>
+            )
+            }
+        }
+        else{
         return(
             <TouchableOpacity style={Styles.card}>
-                <Card3 name={item.title} category={item.category[0]} address={item.address} img={item.images[0]} time={item.createdAt}/>
+                <Card3 name={item.title} category={item.category.name} address={item.address} 
+                img={item.images[0]} time={item.createdAt}/>
             </TouchableOpacity>
         )
+        }
+
+    
     }
 
     return(

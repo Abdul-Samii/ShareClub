@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {View, Text, StyleSheet, TextInput, ScrollView, Alert,} from 'react-native'
 import { Header } from '../../../components'
 import { COLORS, hp, IMAGES, wp } from '../../../constants'
@@ -11,6 +11,20 @@ import { ViewBookedAds } from '../../../store/actions'
 import AsyncStorage from '@react-native-community/async-storage'
 const NeedyDashboard = (props) =>{
 
+
+    const categories=[
+        {categoryName:"Food",categoryIcon:"food"},
+        {categoryName:"Clothes",categoryIcon:"tshirt-crew"},
+        {categoryName:"Shoes",categoryIcon:"shoe-formal"},
+        {categoryName:"yo",categoryIcon:"shoe-formal"},
+        {categoryName:"jo",categoryIcon:"shoe-formal"}
+    ]
+
+    // const [categoriesScroll,setCategoriesScroll] = useState(false)
+
+    const expandCategories=()=>{
+        setCategoriesScroll(!categoriesScroll);
+    }
 
 
     const getBookedAds = async()=>{
@@ -25,6 +39,9 @@ const NeedyDashboard = (props) =>{
     },[])
 
 
+    const handleFuck=()=>{
+        props.navigation.navigate('bookeddonations')
+    }
     return(
         <ScrollView>
             <Header title="ShareClub" iconName="menu" iconRight="bell"/>
@@ -49,8 +66,20 @@ const NeedyDashboard = (props) =>{
                 </Card>
             </View>
 
+            {/* <ScrollView horizontal={true} scrollEnabled={categoriesScroll} showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}}> */}
 
-        <Categories/>
+        {/* {
+            categories.map((item,index)=>{
+                return(
+                <Categories key={Math.random()} count={index} navigation={props.navigation} 
+                categoryName={item.categoryName} categoryIcon={item.categoryIcon} 
+                categoriesScroll={expandCategories} categoriesLength={categories.length}
+                />
+                )
+            })
+        } */}
+        <Categories categories={categories}/>
+        {/* </ScrollView> */}
 
     <Text style={{fontWeight:"bold",fontSize:16, color:'black', marginLeft:wp(5),marginTop:hp(2)}}>
         Statistics
@@ -59,10 +88,10 @@ const NeedyDashboard = (props) =>{
         
     
     <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" 
-    onPress={()=>props.navigation.navigate('bookeddonations')}
+    onPress={()=>handleFuck()}
 
-    number={props.donationAds.currentAds?props.donationAds.currentAds.length:"loading..."}/>
-    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number={props.donationAds.acceptedAds?props.donationAds.acceptedAds.length:"loading..."}/>
+    number="10"/>
+    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number="10"/>
     <Card1 img={IMAGES.dashboard3} cardText="Donations Rejected" number={10}/>        
 
 

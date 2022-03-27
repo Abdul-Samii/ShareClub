@@ -74,7 +74,7 @@ export const ViewBookedAds = (data) => async dispatch=>{
         }
       });
       const result = response.data;
-      console.log("FUCK ---------- ",result);
+      console.log("FUCK ---------- ",result.donations.currentAds[0].category.name);
       dispatch({type:types.VIEW_BOOKEDADS_SUCCESS,payload:result});
   }
   catch(err)

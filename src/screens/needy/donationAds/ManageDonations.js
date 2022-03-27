@@ -7,7 +7,7 @@ import { COLORS, FONTS, hp, IMAGES, wp } from '../../../constants'
 
 const ManageDonations = ({navigation}) =>{
     return(
-        <ScrollView style={Styles.container}>
+        <ScrollView showsHorizontalScrollIndicator={true} style={Styles.container}>
             
             <Header title="Manage Donations" iconRight="bell" iconName="menu"/>
             <View style={Styles.cardContainer}>
