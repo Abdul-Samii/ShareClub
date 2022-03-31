@@ -9,17 +9,6 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants';
 import { ViewBookedAds } from '../../../../store/actions';
 
 const BookedDonations = (props) =>{
-    // const bookedItems=[
-    //     {itemName : 'Shoes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Books', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Clothes', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Bag', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Food', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Blanket', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Bottle', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'},
-    //     {itemName : 'Comb', quantity:2, address: 'Islamabad, Pakistan',time:'2hrs'}
-    // ]
-    // const bookedItems = props.donationAds.currentAds;
 
     const getBookedAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
@@ -36,7 +25,14 @@ const BookedDonations = (props) =>{
 
     const handleFlatList=(item)=>{
             return(
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
+                title:item.title,
+                desc:item.description,
+                phone:item.phone,
+                address:item.address,
+                donationId:item._id,
+                type:'booked'
+            })}>
             <View style={Styles.item}>
                 <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
                 <View style={Styles.ItemBack}>

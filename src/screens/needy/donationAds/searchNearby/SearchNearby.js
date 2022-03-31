@@ -42,7 +42,14 @@ const SearchNearby = (props) =>{
             if(props.route.params.category == item.category.name)
             {
             return(
-                <TouchableOpacity style={Styles.card}>
+                <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
+                    title:item.title,
+                    desc:item.description,
+                    phone:item.phone,
+                    address:item.address,
+                    donationId:item._id,
+                    type:'search'
+                })} style={Styles.card}>
                     <Card3 name={item.title} category={item.category.name} address={item.address} 
                     img={item.images[0]} time={item.createdAt}/>
                 </TouchableOpacity>
@@ -51,7 +58,14 @@ const SearchNearby = (props) =>{
         }
         else{
         return(
-            <TouchableOpacity style={Styles.card}>
+            <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
+                title:item.title,
+                desc:item.description,
+                phone:item.phone,
+                address:item.address,
+                donationId:item._id,
+                type:'search'
+            })} style={Styles.card}>
                 <Card3 name={item.title} category={item.category.name} address={item.address} 
                 img={item.images[0]} time={item.createdAt}/>
             </TouchableOpacity>

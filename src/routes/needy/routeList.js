@@ -1,4 +1,4 @@
-import {Address, BookedDonations, ChangeName, ChangePassword, ChatHome, DonorSignup, ForgotPassword, 
+import {Address, BookedDonations, ChangeName, ChangePassword, ChatHome, DetailDonation, DonorSignup, ForgotPassword, 
   Help, Login, Logout, ManageDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, 
   NewPassword, Notification, ResetCode, SearchNearby, Settings, Signup} from '../../screens'
 // export const initialRouteName = 'splash';
@@ -33,6 +33,7 @@ export const RouteList = [
   {name:'chathome',component:ChatHome},
   {name:'searchnearby',component:SearchNearby},
   {name:'bookeddonations',component:BookedDonations},
+  {name:'detaildonation',component:DetailDonation},
 
   {name:'changepassword',component:ChangePassword},
   {name:'changename',component:ChangeName},

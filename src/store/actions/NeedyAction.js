@@ -6,6 +6,7 @@ import {
     Platform,
     AlertIOS,
   } from 'react-native';
+import { NotifyMessage } from '../../components/toast';
 
 function notifyMessage(msg) {
 if (Platform.OS === 'android') {
@@ -74,12 +75,55 @@ export const ViewBookedAds = (data) => async dispatch=>{
         }
       });
       const result = response.data;
-      console.log("FUCK ---------- ",result.donations.currentAds[0].category.name);
       dispatch({type:types.VIEW_BOOKEDADS_SUCCESS,payload:result});
   }
   catch(err)
   {
     console.log("Something went wrong ----------------- ",err);
     dispatch({type:types.VIEW_BOOKEDADS_FAILED,payload:response.data});
+  }
+}
+
+
+
+//Book Donation
+export const BookedAds = (data) => async dispatch=>{
+  var response;
+  try{
+      dispatch({type:types.BOOK_DONATION_START});
+      let queryData = qs.stringify(data)
+
+       response = await httpRequest.post('needy/bookad',queryData);
+      const result = response.data;
+      dispatch({type:types.BOOK_DONATION_SUCCESS,payload:result});
+      msg = result.msg
+      NotifyMessage(msg)
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    NotifyMessage(response.data.result.msg)
+    dispatch({type:types.BOOK_DONATION_FAILED,payload:response.data});
+  }
+}
+
+//Cancel Donation
+export const CancelDonation = (data) => async dispatch=>{
+  var response;
+  try{
+      dispatch({type:types.BOOK_DONATION_START});
+      let queryData = qs.stringify(data)
+
+       response = await httpRequest.post('needy/canceldonation',queryData);
+      const result = response.data;
+      dispatch({type:types.BOOK_DONATION_SUCCESS,payload:result});
+      msg = result.msg
+      NotifyMessage(msg)
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    NotifyMessage(response.data.result.msg)
+    dispatch({type:types.BOOK_DONATION_FAILED,payload:response.data});
   }
 }

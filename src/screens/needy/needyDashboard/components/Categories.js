@@ -45,9 +45,8 @@ showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}} ref={scroll
     {
             props.categories.map((item,index)=>{
                 count=count+1
-                console.log("PPP ",count)
                 return(
-                <>
+                <View key={index} style={{flexDirection:'row'}}>
                     <TouchableOpacity onPress = {()=>props.navigation.navigate('searchnearby',{category:props.categoryName})}
                     style={Styles.catgories}>
                         <View style={Styles.categoryIcon}>
@@ -86,7 +85,7 @@ showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}} ref={scroll
                     </TouchableOpacity>
                 }
                     
-                    </>
+                    </View>
 
                 )
             })

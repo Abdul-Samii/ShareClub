@@ -29,6 +29,23 @@ export const NeedyReducer = (state=initialState,{type,payload})=>{
             return {...state,isLoading:false, donationAds:payload.donations,msg:payload.msg}
         case types.VIEW_BOOKEDADS_FAILED:
             return {...state, isLoading:false}
+
+        case types.BOOK_DONATION_START:
+            return {...state, isLoading:true}
+        case types.BOOK_DONATION_SUCCESS:
+            return {...state,isLoading:false,msg:payload.msg}
+        case types.BOOK_DONATION_FAILED:
+            return {...state, isLoading:false}
+
+
+        case types.CANCEL_DONATION_START:
+            return {...state, isLoading:true}
+        case types.CANCEL_DONATION_SUCCESS:
+            return {...state,isLoading:false,msg:payload.msg}
+        case types.CANCEL_DONATION_FAILED:
+            return {...state, isLoading:false}
+
+            
         
         
 
