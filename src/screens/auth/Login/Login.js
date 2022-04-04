@@ -29,6 +29,7 @@ const Login = (props) => {
     const handleLogin = async() =>{
         var obj;
         var user;
+        var RType;
         !email&&!password?alert("Fill all fields"):
             
             password.length<8? alert("Password should be minimum 8 charactors"):
@@ -36,8 +37,15 @@ const Login = (props) => {
                         await props.LoginUser(obj),
                         StatesRemoving(),
                          user = await AsyncStorage.getItem('userId'),
+                         RType = await AsyncStorage.getItem('type'),
                         
-                        user?props.navigation.navigate('needy'):console.clear()
+                        user&&
+                            type==='needy'?
+                            props.navigation.navigate('needy')
+                            :
+                            props.navigation.navigate('donor')
+                        
+
                          
                     )
     }
