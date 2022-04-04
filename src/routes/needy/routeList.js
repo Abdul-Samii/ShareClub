@@ -1,6 +1,7 @@
 import {Address, BookedDonations, ChangeName, ChangePassword, ChatHome, DetailDonation, DonorSignup, ForgotPassword, 
   Help, Login, Logout, ManageDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, 
   NewPassword, Notification, ResetCode, SearchNearby, Settings, Signup} from '../../screens'
+import { Donor } from '../../screens/donor';
 // export const initialRouteName = 'splash';
 // export const initialRouteName = 'login';  //for sample test right now I set the initialRoute to login
 
@@ -40,7 +41,11 @@ export const RouteList = [
   {name:'help',component:Help},
   {name:'logout',component:Logout},
   {name:'settings',component:Settings},
-  {name:'address',component:Address}
+  {name:'address',component:Address},
+
+
+
+  {name:'donor',component:Donor}
     
   
 ];

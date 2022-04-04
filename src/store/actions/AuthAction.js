@@ -55,7 +55,7 @@ export const LoginUser = (data) => async dispatch=>{
         let queryData = qs.stringify(data);
          response = await httpRequest.post('/auth/login',queryData);
         const result = response.data;
-        // console.log(result.token)
+        console.log("PPPPPPPPPPPPPPPPPPPPPPPP ",result)
         await AsyncStorage.setItem('item',result.token);
         await AsyncStorage.setItem('userId',result.userId);
         await AsyncStorage.setItem('type',result.type);
