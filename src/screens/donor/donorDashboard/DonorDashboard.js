@@ -9,7 +9,7 @@ import { Card1 } from '../..'
 import { connect } from 'react-redux'
 import { ViewBookedAds } from '../../../store/actions'
 import AsyncStorage from '@react-native-community/async-storage'
-const NeedyDashboard = (props) =>{
+const DonorDashboard = (props) =>{
 
 
     const categories=[
@@ -105,7 +105,7 @@ const mapStateToProps=props=>{
         msg:props.needy.msg
     }
 }
-export default connect(mapStateToProps,{ViewBookedAds})(NeedyDashboard)
+export default connect(mapStateToProps,{ViewBookedAds})(DonorDashboard)
 
 
 const Styles = StyleSheet.create({

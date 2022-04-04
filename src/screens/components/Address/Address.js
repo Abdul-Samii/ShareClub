@@ -11,12 +11,27 @@ import AsyncStorage from '@react-native-community/async-storage'
 const Address = (props) =>{
 
     const [isEdit,setIsEdit] = useState(false)
-
-
-    const [city,setCity] = useState(props.needy.city)
-    const [country,setCountry] = useState(props.needy.country)
-    const [state,setState] = useState()
-    const [address,setAddress] = useState("DHA,house#01")
+    const [city,setCity] = useState()
+        const [country,setCountry] = useState()
+        const [state,setState] = useState()
+        const [address,setAddress] = useState("DHA,house#01")
+    const handleAddressStates=async()=>{
+        const type = await AsyncStorage.getItem('type')
+        if(type==="needy")
+        {
+        const [city,setCity] = useState(props.needy.city)
+        const [country,setCountry] = useState(props.needy.country)
+        const [state,setState] = useState()
+        const [address,setAddress] = useState("DHA,house#01")
+        }
+        if(type==="donor")
+        {
+        const [city,setCity] = useState(props.donor.city)
+        const [country,setCountry] = useState(props.donor.country)
+        const [state,setState] = useState()
+        const [address,setAddress] = useState("DHA,house#01")
+        }
+    }
     
     const [allCountries,setAllCountries] = useState([])
     const [allStates,setAllStates] = useState([])
@@ -111,7 +126,7 @@ setPickerListCity(myMap)
 
 
 useEffect(()=>{
-    
+    handleAddressStates()
     fetchCountries()
     setCountries1()
     // fetchStates()
@@ -312,7 +327,8 @@ const mapStateToProps=props=>{
     return{
         msg:props.update.msg,
         isLoading:props.update.isLoading,
-        needy:props.needy.needyProfile
+        needy:props.needy.needyProfile,
+        donor:props.donor.donorProfile
     }
 }
 

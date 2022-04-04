@@ -1,17 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View,StatusBar } from 'react-native'
 import { COLORS, ICONS, wp } from '../../../constants'
-import { NeedyDashboard } from '../../needy'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {hp} from '../../../constants'
-import { NeedyProfile } from '../needyProfile'
 import { ChatHome, Notification } from '../..'
-import { ManageDonations } from '../donationAds'
+import DonorDashboard from './DonorDashboard'
+import { DonorProfile } from '../donorProfile'
 const Tab = createBottomTabNavigator();
 
 
-
-const Needy = () => {
+const Donor = () => {
     return (
         // later we will wrap this route inside redux provider to access the store all over the application
       <>
@@ -71,11 +69,11 @@ const Needy = () => {
     
     
     >
-      <Tab.Screen name='Home'  component={NeedyDashboard} options={{headerShown:false,title:"Home"}} />
+      <Tab.Screen name='Home'  component={DonorDashboard} options={{headerShown:false,title:"Home"}} />
       <Tab.Screen name="Notification" component={Notification} options={{headerShown:false,title:"Notification"}}/>
-      <Tab.Screen name="Ads" component={ManageDonations} options={{headerShown:false,title:"Ads"}}/>
+      <Tab.Screen name="Ads" component={ChatHome} options={{headerShown:false,title:"Ads"}}/>
       <Tab.Screen name="Chat" component={ChatHome} options={{headerShown:false,title:"Chat"}}/>
-      <Tab.Screen name="Profile" component={NeedyProfile} options={{headerShown:false,title:"Profile"}}/>
+      <Tab.Screen name="Profile" component={DonorProfile} options={{headerShown:false,title:"Profile"}}/>
     </Tab.Navigator >
   
        
@@ -83,6 +81,6 @@ const Needy = () => {
     )
 }
 
-export default Needy;
+export default Donor;
 
 const styles = StyleSheet.create({})

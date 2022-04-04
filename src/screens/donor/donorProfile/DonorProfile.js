@@ -4,12 +4,12 @@ import {View, Text, StyleSheet,Image,FlatList, TouchableOpacity} from 'react-nat
 import { connect } from 'react-redux'
 import { Header } from '../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../constants'
-import { GetNeedy } from '../../../store/actions/NeedyAction'
+import { GetDonor } from '../../../store/actions'
 
 
 
 
-const NeedyProfile=(props)=>{
+const DonorProfile=(props)=>{
     const [name,setName] = useState("")
     const [profession,setProfession] = useState("student")
     const [cell,setCell] = useState("")
@@ -22,29 +22,29 @@ const NeedyProfile=(props)=>{
         {name:'Change Password', icon:'vpn-key',nav:'changepassword'},
         {name:'Help', icon:'live-help',nav:'help'},
         {name:'Share',icon:'share',nav:'changepassword'},
-        {name:'Settings', icon:'settings',nav:'settings'},
+        // {name:'Settings', icon:'settings',nav:'settings'},
         {name:'Logout', icon:'logout',nav:'logout'},
     ]
 
 
-    const setNeedyData=()=>{
-        setName(props.needy.name)
-        setCell(props.needy.phone)
-        setEmail(props.needy.email)
-        setDonationAccepted(props.needy.acceptedAds?props.needy.acceptedAds.length:"Loading...")
-        setDonationPending(props.needy.currentAds?props.needy.currentAds.length:"Loading...")
+    const setDonorData=()=>{
+        setName(props.donor.name)
+        setCell(props.donor.phone)
+        setEmail(props.donor.email)
+        // setDonationAccepted(props.donor.acceptedAds?props.donor.acceptedAds.length:"Loading...")
+        // setDonationPending(props.donor.currentAds?props.donor.currentAds.length:"Loading...")
     }
-    const getNeedyData=async()=>{
-        needyId = await AsyncStorage.getItem('userId')
+    const getDonorData=async()=>{
+        donorId = await AsyncStorage.getItem('userId')
         const obj={
-            needyId
+            donorId
         }
-        await props.GetNeedy(obj)
-        setNeedyData()
+        await props.GetDonor(obj)
+        setDonorData()
     }
 
     useEffect(()=>{
-        getNeedyData()
+        getDonorData()
     },[30]);
 
 
@@ -99,16 +99,16 @@ const NeedyProfile=(props)=>{
     </View>
 
 
-    <View style={Styles.flex}>
+    {/* <View style={Styles.flex}>
         <View style={Styles.stat}>
             <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>{donationAccepted}</Text>
-            <Text style={{color:COLORS.gray2}}>Donations Accepted</Text>
+            <Text style={{color:COLORS.gray2}}>Donations Given</Text>
         </View>
         <View style={Styles.stat}>
             <Text style={{fontSize:25,fontWeight:'bold',textAlign:'center'}}>{donationPending}</Text>
             <Text style={{color:COLORS.gray2}}>Donations Pending</Text>
         </View>
-    </View>
+    </View> */}
 
 
 
@@ -122,13 +122,14 @@ const NeedyProfile=(props)=>{
     )
 }
 const mapStateToProps=props=>{
+    console.log("MAIN ---- ",props.donor)
     return{
         isLoading:props.auth.isLoading,
-        needy:props.needy.needyProfile
+        donor:props.donor.donorProfile
     }
 }
 
-export default connect(mapStateToProps,{GetNeedy})(NeedyProfile)
+export default connect(mapStateToProps,{GetDonor})(DonorProfile)
 
 const Styles = StyleSheet.create({
     top:{
