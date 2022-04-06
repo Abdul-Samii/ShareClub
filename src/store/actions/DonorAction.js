@@ -35,6 +35,27 @@ export const GetDonor = (data) => async dispatch=>{
     }
 }
 
+//Add Donation
+export const AddNewDonation = (data) => async dispatch=>{
+  var response
+  try{
+      dispatch({type:types.ADD_DONATION_START});
+      let queryData = qs.stringify(data);
+       response = await httpRequest.post('/donor/donationad',queryData);
+      const result = response.data;
+      console.log("*********jjj*** ",result)
+      NotifyMessage(response.data.msg)
+      dispatch({type:types.ADD_DONATION_SUCCESS,payload:result});
+
+  }
+  catch(err)
+  {
+      NotifyMessage(response.data.msg)
+      console.log("Error in input : -------------------------------------------------------------",err);
+      dispatch({type:types.ADD_DONATION_FAILED});
+  }
+}
+
 
 
 

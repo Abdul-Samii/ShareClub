@@ -6,6 +6,7 @@ import {hp} from '../../../constants'
 import { ChatHome, Notification } from '../..'
 import DonorDashboard from './DonorDashboard'
 import { DonorProfile } from '../donorProfile'
+import { ManageDonorDonations } from '../donationAds'
 const Tab = createBottomTabNavigator();
 
 
@@ -71,7 +72,7 @@ const Donor = () => {
     >
       <Tab.Screen name='Home'  component={DonorDashboard} options={{headerShown:false,title:"Home"}} />
       <Tab.Screen name="Notification" component={Notification} options={{headerShown:false,title:"Notification"}}/>
-      <Tab.Screen name="Ads" component={ChatHome} options={{headerShown:false,title:"Ads"}}/>
+      <Tab.Screen name="Ads" component={ManageDonorDonations} options={{headerShown:false,title:"Ads"}}/>
       <Tab.Screen name="Chat" component={ChatHome} options={{headerShown:false,title:"Chat"}}/>
       <Tab.Screen name="Profile" component={DonorProfile} options={{headerShown:false,title:"Profile"}}/>
     </Tab.Navigator >

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "407350805066",
+    "project_id": "shareclub-fyp",
+    "storage_bucket": "shareclub-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407350805066:android:8911ca65f1313cbcb9dcb3",
+        "android_client_info": {
+          "package_name": "com.shareclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407350805066-nfk982te4v7e0snhqsn9okv9o4pkbor7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4EKDeIC1wNeuoSOWqJM89pzN9RYsPslM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407350805066-nfk982te4v7e0snhqsn9okv9o4pkbor7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

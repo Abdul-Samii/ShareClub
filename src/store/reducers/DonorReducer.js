@@ -24,6 +24,13 @@ export const DonorReducer = (state=initialState,{type,payload})=>{
         case types.VIEW_BOOKEDADS_FAILED:
             return {...state, isLoading:false}
 
+        case types.ADD_DONATION_START:
+            return {...state, isLoading:true}
+        case types.ADD_DONATION_SUCCESS:
+            return {...state,isLoading:false,msg:payload.msg}
+        case types.ADD_DONATION_FAILED:
+            return {...state, isLoading:false}
+
             
         
         
