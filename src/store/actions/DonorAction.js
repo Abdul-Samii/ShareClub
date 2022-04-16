@@ -56,11 +56,22 @@ export const AddNewDonation = (data) => async dispatch=>{
   }
 }
 
+//Get All Categories
+export const GetAllCategories = (data) => async dispatch=>{
+  
+  try{
+      dispatch({type:types.GET_CATEGORY_START});
+      let queryData = qs.stringify(data)
+      console.log("Testing pass ",data)
 
-
-
-
-
-
-
-
+      const response = await httpRequest.get('admin/category');
+      const result = response.data;
+      console.log("Results ---------- ",result);
+      dispatch({type:types.GET_CATEGORY_SUCCESS,payload:result});
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    dispatch({type:types.GET_CATEGORY_FAILED});
+  }
+}

@@ -77,7 +77,7 @@ const NeedyDashboard = (props) =>{
                 )
             })
         } */}
-        <Categories categories={categories}/>
+        <Categories categories={categories} navigation={props.navigation}/>
         {/* </ScrollView> */}
 
     <Text style={{fontWeight:"bold",fontSize:16, color:'black', marginLeft:wp(5),marginTop:hp(2)}}>

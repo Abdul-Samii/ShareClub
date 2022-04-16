@@ -4,6 +4,7 @@ import { COLORS, hp, ICONS, wp } from '../../../../constants'
 import { useRef } from 'react';
 
 const Categories = (props) =>{
+    console.log("[[[[[[ ",props)
     const [last,setlast] = useState(false)
     const [expandBtnText,setExpandBtnText] = useState("More")
     const [categoriesScroll,setCategoriesScroll] = useState(false)
@@ -44,10 +45,11 @@ showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}} ref={scroll
 
     {
             props.categories.map((item,index)=>{
+                console.log("oooo ooo oo ",item)
                 count=count+1
                 return(
                 <View key={index} style={{flexDirection:'row'}}>
-                    <TouchableOpacity onPress = {()=>props.navigation.navigate('searchnearby',{category:props.categoryName})}
+                    <TouchableOpacity onPress = {()=>props.navigation.navigate('searchnearby',{category:item.categoryName})}
                     style={Styles.catgories}>
                         <View style={Styles.categoryIcon}>
                             <ICONS.MaterialCommunityIcons name={item.categoryIcon} size={32} color={COLORS.red1}

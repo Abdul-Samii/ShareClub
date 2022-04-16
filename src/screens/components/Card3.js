@@ -50,7 +50,9 @@ const Styles = StyleSheet.create({
     },
     timeIcon:{
         marginTop:hp(2),
-        marginLeft:wp(8)
+        // marginLeft:wp(8)
+        marginLeft:wp(83),
+        position:'absolute'
     },
     time:{
         fontSize:10,
@@ -58,6 +60,7 @@ const Styles = StyleSheet.create({
     },
     icon:{
         marginTop:hp(6),
-        // marginLeft:wp(1)
+        position:'absolute',
+        marginLeft:wp(1)
     }
 })

@@ -50,7 +50,7 @@ export const ViewNearbyAds = (data) => async dispatch=>{
         }
       });
       const result = response.data;
-      console.log("Results ---------- ",result);
+      console.log("Results Working ---------- ",result);
       dispatch({type:types.VIEW_NEARBY_ADS_SUCCESS,payload:result});
   }
   catch(err)

@@ -6,24 +6,14 @@ import { Card3 } from '../../..'
 import { Header } from '../../../../components'
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants'
 import { ViewNearbyAds } from '../../../../store/actions'
+import Wait from '../../../../components/layout/Wait'
 
 
 
 const SearchNearby = (props) =>{
-    const adsList = [
-        {name:"Sports Shoes", category:"Shoes", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Jeans Pent", category:"Cloths", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"School Bag", category:"Bag", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"T-Shirt", category:"Cloths", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Cricket Bat", category:"Sports", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Biryani", category:"Food", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Sports Bag", category:"Bag", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Rain Coat", category:"Cloths", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Sun glasses", category:"Accessories", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Blanket", category:"Cloths", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-        {name:"Books of 5th class", category:"Books", address:"Islamabad, Pakistan", img:IMAGES.user,time:"2MIN"},
-    ]
-
+   
+    
+        
 
     const getDonationAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
@@ -37,6 +27,7 @@ const SearchNearby = (props) =>{
     },[5])
 
     const handleFlatList = (item) =>{
+        console.log("___________>>> ",props.route)
         if(props.route.params)
         {
             if(props.route.params.category == item.category.name)
@@ -76,6 +67,8 @@ const SearchNearby = (props) =>{
     }
 
     return(
+        <>
+        {props.isLoading?<Wait/>:
         <View style={Styles.container}>
             <Header title="Nearby Donation Ads" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
             {/* {
@@ -102,13 +95,16 @@ const SearchNearby = (props) =>{
 
             
         </View>
+}
+</>
     )
 }
 
 const mapStateToProps=props=>{
     return{
         donationAds:props.needy.donationAds,
-        msg:props.needy.msg
+        msg:props.needy.msg,
+        isLoading:props.needy.isLoading
     }
 }
 export default connect(mapStateToProps,{ViewNearbyAds})(SearchNearby)

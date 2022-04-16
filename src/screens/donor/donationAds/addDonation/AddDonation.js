@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {View, Text, StyleSheet, Image} from 'react-native'
 import { TextInput } from 'react-native-paper'
 import { FormInput, Header } from '../../../../components'
@@ -10,10 +10,11 @@ import storage from '@react-native-firebase/storage';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-community/async-storage'
 import { connect } from 'react-redux'
-import { AddNewDonation } from '../../../../store/actions'
+import { AddNewDonation, GetAllCategories } from '../../../../store/actions'
 
 
 const AddDonation=(props)=>{
+
 
     const [Title,setTitle]=useState("")
     const [Desc,setDesc]=useState("")
@@ -22,13 +23,26 @@ const AddDonation=(props)=>{
     const [Country,setCountry]=useState("")
     const [Category,setCategory]=useState("")
     const [image,setImage]=useState("");
-
-    const pickerListCategory=[
+    const [pickerListCategory,setPickerListCategory]=useState("")
+    const pickerListCategor=[
         {label:"Food","value":"Food"},
         {label:"Shoes",value:"Shoes"},
         {label:"Clothes",value:"Clothes"},
     ]
 
+
+    const setCategoriesList=()=>{
+        var myMap = [];
+        const cat = props.categories
+        cat.map((item,index)=>{
+            myMap.push({"label":item.name,"value":item._id})
+       
+    })
+    setPickerListCategory(myMap)
+
+    }
+
+console.log("0000000000000 ",pickerListCategory)
     const ImageOpen=(props)=>{
         launchImageLibrary({quality:0.5},(fileobj)=>{
             
@@ -60,14 +74,22 @@ const AddDonation=(props)=>{
             const obj={
                 title:Title,
                 description:Desc,
-                images:image,
+                // images:image,
                 phone:Phone,
                 city:City,
                 country:Country,
                 owner,
+                category:Category
             }
             await props.AddNewDonation(obj)
             props.navigation.goBack()
+        }
+        useEffect(()=>{
+            handleGetCategory()
+            setCategoriesList()
+        },[3])
+        const handleGetCategory=async()=>{
+            await props.GetAllCategories()
         }
     return(
         <View style={Styles.container}>
@@ -164,10 +186,11 @@ const AddDonation=(props)=>{
 }
 const mapStateToProps=props=>{
     return{
-        msg:props.donor.msg
+        msg:props.donor.msg,
+        categories:props.donor.categories
     }
 }
-export default connect(mapStateToProps,{AddNewDonation})(AddDonation)
+export default connect(mapStateToProps,{AddNewDonation,GetAllCategories})(AddDonation)
 
 const Styles = StyleSheet.create({
     container:{

@@ -4,6 +4,7 @@ const initialState = {
     isLoading:false,
     donorProfile:'',
     donationAds:[],
+    categories:[],
     msg:''
 };
 
@@ -32,6 +33,12 @@ export const DonorReducer = (state=initialState,{type,payload})=>{
             return {...state, isLoading:false}
 
             
+        case types.GET_CATEGORY_START:
+            return {...state, isLoading:true}
+        case types.GET_CATEGORY_SUCCESS:
+            return {...state,isLoading:false,categories:payload.categories,msg:payload.msg}
+        case types.GET_CATEGORY_FAILED:
+            return {...state, isLoading:false}
         
         
 

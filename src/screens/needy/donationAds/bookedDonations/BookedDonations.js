@@ -42,8 +42,8 @@ const BookedDonations = (props) =>{
                             <Text style={Styles.quantity}>Category : {item.category.name}</Text>
                             <Text style={Styles.address}>Address : {item.address}</Text>
                         </View>
-                        <View style={{marginTop:hp(3),marginLeft:wp(7)}}>
-                            <Text style={{fontSize:10}} >{item.time}</Text>
+                        <View style={{marginTop:hp(3),marginLeft:wp(7),position:'absolute',marginLeft:wp(80)}}>
+                            {/* <Text style={{fontSize:10}} >{item.time}</Text> */}
                             <ICONS.MaterialIcons  name="more-vert" size={20} style={{marginTop:hp(1)}}/>
                        </View> 
                     </View>
