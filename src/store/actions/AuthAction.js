@@ -35,7 +35,7 @@ export const RegisterDonor = (data) => async dispatch=>{
         const response = await httpRequest.post('/auth/donor',queryData);
         const result = response.data;
         dispatch({type:types.REGISTER_DONOR_SUCCESS,payload:result});
-        // notifyMessage(result)
+        NotifyMessage(result.msg)
 
     }
     catch(err)

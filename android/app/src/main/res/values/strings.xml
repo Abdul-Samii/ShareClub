@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ShareClub</string>
+    <string name="facebook_app_id">284173937069133</string>
+    <string name="fb_login_protocol_scheme">fb284173937069133</string>
+    <string name="facebook_client_token">1e65cccc494994ca5027c21d2b961d83</string>
 </resources>

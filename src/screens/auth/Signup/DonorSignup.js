@@ -6,7 +6,8 @@ import { RegForm } from './components'
 import { RegisterDonor } from '../../../store/actions'
 import { connect } from 'react-redux'
 import Wait from '../../../components/layout/Wait'
-
+import { AccessToken, GraphRequest, GraphRequestManager, LoginButton, LoginManager } from "react-native-fbsdk"
+import {NotifyMessage} from '../../../components/toast'
 const DonorSignup = (props) =>{
 
     const [name,setName] = useState()
@@ -14,7 +15,8 @@ const DonorSignup = (props) =>{
     const [phone,setPhone] = useState("")
     const [password,setPassword] = useState()
     const [confirmPassword,setConfirmPassword] = useState()
-    
+    const [pic,setProfilePic] = useState()
+    const [fbID,setFBID] = useState()
 
     
     const StatesRemoving = ()=>
@@ -24,28 +26,125 @@ const DonorSignup = (props) =>{
         setPhone("")
         setPassword("")
         setConfirmPassword("")
+        setProfilePic("")
+        setFBID("")
         props.msg=''
     }
 
 
     const handleRegistration = async() =>{
         var obj;
-        !name&&!email&&!phone?notifyMessage("Fill all fields"):
+        !name&&!email&&!phone?NotifyMessage("Fill all fields"):
             phone.length!=13?alert("Phone number length is invalid"):
              phone[0]!='+'&&phone[1]!='9'&&phone[2]!='2'? alert("Invalid phone number"):
                 password.length<8? alert("Password should be minimum 8 charactors"):
                     password !== confirmPassword?alert("Password donot march!"):( obj={name,email,phone,password}, 
                         await props.RegisterDonor(obj),
-                        // setTimeout(function(){notifyMessage(props.msg)}, 3000),
+                        // setTimeout(function(){NotifyMessage(props.msg)}, 3000),
                         StatesRemoving()
-                        )
-                    
+                    )        
+    }
+    const handleFBRegistration = async() =>{
+        var obj;
+        var signupType = 2;
+        !name&&!email&&!fbID?NotifyMessage("Your fb is missing required data"):( obj={name,email,pic,fbID,signupType}, 
+                        await props.RegisterDonor(obj),
+                        StatesRemoving()
+                        // setTimeout(function(){NotifyMessage(props.msg)}, 3000)
+                    )        
+    }
 
-                            
-                            
-        
+
+
+
+
+
+
+
+
+
+
+
+
+    const fbLogin=(resCallback)=>{
+        LoginManager.logInWithPermissions(['email','public_profile']).then(
+            result=>{
+                console.log("result==============>>>> ",result);
+                if(result.declinedPermissions && result.declinedPermissions.includes('email')){
+                    resCallback({message:"Email is required"})
+                }
+                if(result.isCancelled){
+                    console.log("error")
+                }
+                else{
+                   
+                    AccessToken.getCurrentAccessToken().then((data) => {
+                        console.log(data.accessToken.toString());
+                        const processRequest = new GraphRequest(
+                          '/me?fields=name,email,picture.type(large)',
+                          null,
+                          getResponseInfo,
+                        );
+                        // Start the graph request.
+                        new GraphRequestManager()
+                          .addRequest(processRequest).start();
+                      });
+                }
+            },
+            function(error){
+                console.log("Login fail with errors: "+error)
+            }
+        )
         
     }
+
+
+
+const onFbLogin = async() =>{
+    try{
+        await fbLogin(_responseInfoCallBack)
+    }
+    catch(err)
+    {
+        console.log("Error in onFbLogin")
+    }
+}
+const _responseInfoCallBack = async(error,result)=>{
+    if(error)
+    {
+        console.log("Erro showing data")
+        return;
+    }
+    else{
+        const userData = result
+        console.log("Yooooooo=========> ",userData)
+    }
+}
+
+
+const getResponseInfo = (error, result) => {
+    if (error) {
+      //Alert for the Error
+      alert('Error fetching data: ' + error.toString());
+    } else {
+      //response alert
+      console.log(result)
+      console.log(JSON.stringify(result));
+      setName(result.name);
+      setFBID(result.id);
+      setProfilePic(result.picture.data.url);
+      setEmail(result.email)
+      handleFBRegistration()
+    }
+  };
+
+
+
+
+
+
+
+
 
 
     return(
@@ -65,14 +164,14 @@ const DonorSignup = (props) =>{
                         />
                     </View>
 
-                    <View style={{marginLeft:wp(10),...Styles.icon}}>
+                    <TouchableOpacity onPress={()=>onFbLogin()} style={{marginLeft:wp(10),...Styles.icon}}>
                         <ICONS.Fontisto
                             name="facebook" 
                             color={COLORS.blue1}
                             size={30}
                             style={{marginLeft:wp(7),marginTop:hp(1.5)}}
                         />
-                    </View>
+                    </TouchableOpacity>
                     
             </View>
 
@@ -94,6 +193,7 @@ const DonorSignup = (props) =>{
 }
 
 const mapStateToProps=props=>{
+    
     return{
         msg:props.auth.msg,
         isLoading:props.auth.isLoading
