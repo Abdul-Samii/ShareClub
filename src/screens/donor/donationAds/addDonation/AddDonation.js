@@ -35,7 +35,7 @@ const AddDonation=(props)=>{
         var myMap = [];
         const cat = props.categories
         cat.map((item,index)=>{
-            myMap.push({"label":item.name,"value":item._id})
+            myMap.push({"label":item.name,"value":item._id,"key":index})
        
     })
     setPickerListCategory(myMap)

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import React,{useState} from 'react'
-import {View, Text, StyleSheet, Image,KeyboardAvoidingView} from 'react-native'
+import {View, Text, StyleSheet, Image,KeyboardAvoidingView, TouchableOpacity} from 'react-native'
 import { RadioButton } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { Button } from '../../../components/form'
@@ -11,6 +11,7 @@ import { COLORS, FONTS, hp, ICONS, IMAGES, wp } from '../../../constants'
 import { LoginUser } from '../../../store/actions'
 import { Header } from '../components'
 import RegisterNow from '../components/RegisterNow'
+import { AccessToken, GraphRequest, GraphRequestManager, LoginButton, LoginManager } from "react-native-fbsdk"
 
 const Login = (props) => {
 
@@ -18,6 +19,7 @@ const Login = (props) => {
     const [password,setPassword] = useState()
     const [type,setType] = useState('needy');
     const [userId,setUserId] = useState();
+    const [fbID,setFBID] = useState();
 
     const StatesRemoving = ()=>
     {
@@ -30,10 +32,11 @@ const Login = (props) => {
         var obj;
         var user;
         var RType;
+        var loginType = 1;
         !email&&!password?alert("Fill all fields"):
             
             password.length<8? alert("Password should be minimum 8 charactors"):
-                   ( obj={email,password,type}, 
+                   ( obj={email,password,type,loginType}, 
                         await props.LoginUser(obj),
                         StatesRemoving(),
                          user = await AsyncStorage.getItem('userId'),
@@ -49,6 +52,128 @@ const Login = (props) => {
                          
                     )
     }
+
+    const handleFBLogin = async() =>{
+        var obj;
+        var user;
+        var RType;
+        var loginType = 2;
+        console.log("!!!!!!!!!!!!!!!!!!!!!! ",email);
+        console.log("----------------------",fbID)
+        !email&&!fbID?alert("Fill all fields"):( obj={email,fbID,type,loginType}, 
+                        await props.LoginUser(obj),
+                        StatesRemoving(),
+                         user = await AsyncStorage.getItem('userId'),
+                         RType = await AsyncStorage.getItem('type'),
+                        
+                        user&&
+                            type==='needy'?
+                            props.navigation.navigate('needy')
+                            :
+                            props.navigation.navigate('donor')
+                        
+
+                         
+                    )
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const fbLogin=(resCallback)=>{
+        LoginManager.logInWithPermissions(['email','public_profile']).then(
+            result=>{
+                console.log("result==============>>>> ",result);
+                if(result.declinedPermissions && result.declinedPermissions.includes('email')){
+                    resCallback({message:"Email is required"})
+                }
+                if(result.isCancelled){
+                    console.log("error")
+                }
+                else{
+                   
+                    AccessToken.getCurrentAccessToken().then((data) => {
+                        console.log(data.accessToken.toString());
+                        const processRequest = new GraphRequest(
+                          '/me?fields=name,email,picture.type(large)',
+                          null,
+                          getResponseInfo,
+                        );
+                        // Start the graph request.
+                        new GraphRequestManager()
+                          .addRequest(processRequest).start();
+                      });
+                }
+            },
+            function(error){
+                console.log("Login fail with errors: "+error)
+            }
+        )
+        
+    }
+
+
+
+const onFbLogin = async() =>{
+    try{
+        await fbLogin(_responseInfoCallBack)
+    }
+    catch(err)
+    {
+        console.log("Error in onFbLogin")
+    }
+}
+const _responseInfoCallBack = async(error,result)=>{
+    if(error)
+    {
+        console.log("Erro showing data")
+        return;
+    }
+    else{
+        const userData = result
+        console.log("Yooooooo=========> ",userData)
+    }
+}
+
+
+const getResponseInfo = (error, result) => {
+    if (error) {
+      //Alert for the Error
+      alert('Error fetching data: ' + error.toString());
+    } else {
+      //response alert
+      console.log(result)
+      console.log(JSON.stringify(result));
+      setFBID(result.id);
+      setEmail(result.email)
+      handleFBLogin()
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // console.log(props.msg)
     return(
@@ -119,7 +244,7 @@ const Login = (props) => {
                         <Text style={{fontFamily:FONTS.heading,fontSize:10,marginTop:hp(1)}}>Login with Google</Text>
                     </View>
                     <Text style={{marginTop:hp(4),marginLeft:wp(8)}}>or</Text>
-                    <View style={{marginLeft:wp(10)}}>
+                    <TouchableOpacity onPress={()=>onFbLogin()} style={{marginLeft:wp(10)}}>
                         <ICONS.Fontisto
                             name="facebook" 
                             color={COLORS.blue1}
@@ -127,7 +252,7 @@ const Login = (props) => {
                             style={{marginLeft:wp(9)}}
                         />
                         <Text style={{fontFamily:FONTS.heading,fontSize:10,marginTop:hp(1)}}>Login with Facebook</Text>
-                    </View>
+                    </TouchableOpacity>
                     
                 </View>
             </View>

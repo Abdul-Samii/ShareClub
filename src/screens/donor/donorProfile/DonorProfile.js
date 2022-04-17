@@ -16,6 +16,7 @@ const DonorProfile=(props)=>{
     const [email, setEmail] = useState("")
     const [donationAccepted,setDonationAccepted] = useState()
     const [donationPending,setDonationPending] = useState()
+    const [dp,setDP] = useState()
 
     const list=[
         {name:'Address', icon:'location-city',nav:'address'},
@@ -31,13 +32,16 @@ const DonorProfile=(props)=>{
         setName(props.donor.name)
         setCell(props.donor.phone)
         setEmail(props.donor.email)
+        setDP(props.donor.pic)
         // setDonationAccepted(props.donor.acceptedAds?props.donor.acceptedAds.length:"Loading...")
         // setDonationPending(props.donor.currentAds?props.donor.currentAds.length:"Loading...")
     }
     const getDonorData=async()=>{
         donorId = await AsyncStorage.getItem('userId')
+        const signupType = await AsyncStorage.getItem('signupType')
         const obj={
-            donorId
+            donorId,
+            signupType
         }
         await props.GetDonor(obj)
         setDonorData()
@@ -72,7 +76,11 @@ const DonorProfile=(props)=>{
             <Header title="Profile"/>
             <View style={{flexDirection:'row'}}>
                 <View style={Styles.top}>
+                    {
+                    dp?<Image source={{uri:dp}} style={Styles.img}/>:
                     <Image source={IMAGES.user} style={Styles.img}/>
+                    
+                    }
                     <View style={Styles.nameDesc}>
                         <Text style={Styles.name}>{name?name:"Loading..."}</Text>
                         <Text>{profession?profession:"Loading..."}</Text>

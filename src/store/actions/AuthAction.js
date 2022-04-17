@@ -59,6 +59,8 @@ export const LoginUser = (data) => async dispatch=>{
         await AsyncStorage.setItem('item',result.token);
         await AsyncStorage.setItem('userId',result.userId);
         await AsyncStorage.setItem('type',result.type);
+        const loginType = JSON.stringify(result.signupType);
+        await AsyncStorage.setItem('signupType',loginType);
         dispatch({type:types.LOGIN_SUCCESS,payload:result.msg});
         msg = result.msg
         NotifyMessage(msg)
