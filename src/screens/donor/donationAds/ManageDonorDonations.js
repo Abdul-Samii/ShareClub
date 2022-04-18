@@ -16,8 +16,8 @@ const ManageDonorDonations = ({navigation}) =>{
                 <Card2 img={IMAGES.nearby} text="Add New Donations Ad"/>
             </TouchableOpacity>
 
-                <TouchableOpacity >
-                    <Card2 img={IMAGES.hand} text="Ongoing Donation Ads" />
+                <TouchableOpacity onPress={()=>navigation.navigate('bookeddonordonations')}>
+                    <Card2 img={IMAGES.hand} text="Booked Donations" />
                 </TouchableOpacity>
 
 

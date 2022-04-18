@@ -16,6 +16,7 @@ const NeedyProfile=(props)=>{
     const [email, setEmail] = useState("")
     const [donationAccepted,setDonationAccepted] = useState()
     const [donationPending,setDonationPending] = useState()
+    const [dp,setDP] = useState()
 
     const list=[
         {name:'Address', icon:'location-city',nav:'address'},
@@ -33,11 +34,14 @@ const NeedyProfile=(props)=>{
         setEmail(props.needy.email)
         setDonationAccepted(props.needy.acceptedAds?props.needy.acceptedAds.length:"Loading...")
         setDonationPending(props.needy.currentAds?props.needy.currentAds.length:"Loading...")
+        setDP(props.needy.pic)
     }
     const getNeedyData=async()=>{
         needyId = await AsyncStorage.getItem('userId')
+        const signupType = await AsyncStorage.getItem('signupType')
         const obj={
-            needyId
+            needyId,
+            signupType
         }
         await props.GetNeedy(obj)
         setNeedyData()
@@ -72,7 +76,11 @@ const NeedyProfile=(props)=>{
             <Header title="Profile"/>
             <View style={{flexDirection:'row'}}>
                 <View style={Styles.top}>
+                {
+                    dp?<Image source={{uri:dp}} style={Styles.img}/>:
                     <Image source={IMAGES.user} style={Styles.img}/>
+                    
+                    }
                     <View style={Styles.nameDesc}>
                         <Text style={Styles.name}>{name?name:"Loading..."}</Text>
                         <Text>{profession?profession:"Loading..."}</Text>

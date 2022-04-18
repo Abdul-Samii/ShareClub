@@ -1,1 +1,1 @@
-export {default as BookedDonations} from './BookedDonations'
+export {default as BookedDonorDonations} from './BookedDonations'

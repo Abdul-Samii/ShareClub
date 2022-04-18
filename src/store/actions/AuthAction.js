@@ -15,7 +15,7 @@ export const RegisterNeedy = (data) => async dispatch=>{
         const result = response.data;
         console.log("99999999999 ",response);
         dispatch({type:types.REGISTER_NEEDY_SUCCESS,payload:result});
-        // notifyMessage(result)
+        NotifyMessage(result.msg)
 
     }
     catch(err)

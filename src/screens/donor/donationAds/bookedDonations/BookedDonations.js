@@ -6,16 +6,17 @@ import { Searchbar } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { Header } from '../../../../components';
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants';
-import { ViewBookedAds } from '../../../../store/actions';
+import { ViewDonorBookedAds } from '../../../../store/actions';
 
 const BookedDonations = (props) =>{
 
     const getBookedAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
+        console.log("> ",userId)
         const obj = {
             userId
         }
-        await props.ViewBookedAds(userId)
+        await props.ViewDonorBookedAds(userId)
     }
     useEffect(()=>{
         getBookedAds()
@@ -31,7 +32,8 @@ const BookedDonations = (props) =>{
                 phone:item.phone,
                 address:item.address,
                 donationId:item._id,
-                type:'booked'
+                type:'booked',
+                user:'donor'
             })}>
             <View style={Styles.item}>
                 <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
@@ -42,7 +44,7 @@ const BookedDonations = (props) =>{
                             <Text style={Styles.quantity}>Category : {item.category.name}</Text>
                             <Text style={Styles.address}>Address : {item.address}</Text>
                         </View>
-                        <View style={{marginTop:hp(3),marginLeft:wp(7)}}>
+                        <View style={{marginTop:hp(3),marginLeft:wp(7),position:'absolute',marginLeft:wp(80)}}>
                             <Text style={{fontSize:10}} >{item.time}</Text>
                             <ICONS.MaterialIcons  name="more-vert" size={20} style={{marginTop:hp(1)}}/>
                        </View> 
@@ -60,7 +62,7 @@ const BookedDonations = (props) =>{
             <Searchbar style={Styles.searchbar}/>
 
             <FlatList
-                data={props.donationAds.currentAds}
+                data={props.donationAds}
                 keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
@@ -71,12 +73,13 @@ const BookedDonations = (props) =>{
 }
 
 const mapStateToProps=props=>{
+    console.log("Phuddi ",props.donor.donationAds.bookedAds)
     return{
-        donationAds:props.needy.donationAds,
+        donationAds:props.donor.donationAds.bookedAds,
         msg:props.needy.msg
     }
 }
-export default connect(mapStateToProps,{ViewBookedAds})(BookedDonations)
+export default connect(mapStateToProps,{ViewDonorBookedAds})(BookedDonations)
 
 const Styles = StyleSheet.create({
     container:{

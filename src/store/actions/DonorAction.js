@@ -75,3 +75,27 @@ export const GetAllCategories = (data) => async dispatch=>{
     dispatch({type:types.GET_CATEGORY_FAILED});
   }
 }
+
+
+//View Donor Booked Ads
+export const ViewDonorBookedAds = (data) => async dispatch=>{
+  var response;
+  try{
+      dispatch({type:types.VIEW_BOOKEDADS_START});
+      let queryData = qs.stringify(data)
+      console.log("Testing pass ",data)
+
+       response = await httpRequest.get('donor/bookeddonations',{
+        params:{
+          userId:data
+        }
+      });
+      const result = response.data;
+      dispatch({type:types.VIEW_BOOKEDADS_SUCCESS,payload:result});
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    dispatch({type:types.VIEW_BOOKEDADS_FAILED,payload:response.data});
+  }
+}
