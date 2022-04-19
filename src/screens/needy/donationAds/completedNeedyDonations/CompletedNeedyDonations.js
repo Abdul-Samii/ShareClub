@@ -5,13 +5,15 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Searchbar } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { Header } from '../../../../components';
+import Wait from '../../../../components/layout/Wait';
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants';
 import { ViewBookedAds } from '../../../../store/actions';
 
-const BookedDonations = (props) =>{
+const CompletedNeedyDonations = (props) =>{
 
     const getBookedAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
+        console.log("> ",userId)
         const obj = {
             userId
         }
@@ -24,16 +26,9 @@ const BookedDonations = (props) =>{
 
 
     const handleFlatList=(item)=>{
+        console.log("TRUCK",item)
             return(
-            <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
-                title:item.title,
-                desc:item.description,
-                phone:item.phone,
-                address:item.address,
-                donationId:item._id,
-                img:item.images[0],
-                type:'booked'
-            })}>
+            
             <View style={Styles.item}>
                 <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
                 <View style={Styles.ItemBack}>
@@ -44,41 +39,44 @@ const BookedDonations = (props) =>{
                             <Text style={Styles.address}>Address : {item.address}</Text>
                         </View>
                         <View style={{marginTop:hp(3),marginLeft:wp(7),position:'absolute',marginLeft:wp(80)}}>
-                            {/* <Text style={{fontSize:10}} >{item.time}</Text> */}
+                            <Text style={{fontSize:10}} >{item.time}</Text>
                             <ICONS.MaterialIcons  name="more-vert" size={20} style={{marginTop:hp(1)}}/>
                        </View> 
                     </View>
                 </View>
             </View>
-            </TouchableOpacity>
         )
     
     }
-
+console.log("YOOOOOOOOOOOOOOOOOO ",props.donationAds)
     return(
+        <>
+        {props.isLoading?<Wait/>:
         <View style={Styles.container}>
             <Header title="Booked donations" iconName="arrow-left" iconRight="bell" Goback={()=>props.navigation.goBack()}/>
             <Searchbar style={Styles.searchbar}/>
 
             <FlatList
-                data={props.donationAds.bookedAds}
+                data={props.donationAds}
                 keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
             />
 
         </View>
+    }
+    </>
     )
 }
 
 const mapStateToProps=props=>{
-    console.log()
     return{
-        donationAds:props.needy.donationAds,
-        msg:props.needy.msg
+        donationAds:props.needy.donationAds.completedAds,
+        msg:props.needy.msg,
+        isLoading:props.donor.isLoad
     }
 }
-export default connect(mapStateToProps,{ViewBookedAds})(BookedDonations)
+export default connect(mapStateToProps,{ViewBookedAds})(CompletedNeedyDonations)
 
 const Styles = StyleSheet.create({
     container:{

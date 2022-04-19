@@ -1,4 +1,4 @@
-import {AddDonation, Address, BookedDonations, BookedDonorDonations, ChangeName, ChangePassword, ChatHome, CompletedDonorDonations, DetailDonation, Donor, DonorSignup, ForgotPassword, 
+import {AddDonation, Address, BookedDonations, BookedDonorDonations, ChangeName, ChangePassword, ChatHome, CompletedDonorDonations, CompletedNeedyDonations, DetailDonation, Donor, DonorSignup, ForgotPassword, 
   GenerateQR, 
   Help, Login, Logout, ManageDonations, ManageDonorDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, 
   NewPassword, Notification, ResetCode, ScanQR, SearchNearby, Settings, Signup} from '../../screens'
@@ -35,6 +35,7 @@ export const RouteList = [
   {name:'searchnearby',component:SearchNearby},
   {name:'bookeddonations',component:BookedDonations},
   {name:'detaildonation',component:DetailDonation},
+  {name:'completedneedydonations',component:CompletedNeedyDonations},
   {name:'scanqr',component:ScanQR},
 
   {name:'changepassword',component:ChangePassword},

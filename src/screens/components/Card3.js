@@ -6,7 +6,7 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../constants';
 const Card3 = ({name, category, address, time, img}) =>{
     return(
         <View style={Styles.card}>
-                <Image source={img} style={Styles.img}/>
+                <Image source={{uri:img}} style={Styles.img}/>
                 <View style={Styles.detail}>
                     <Text style={Styles.name}>Name : {name}</Text>
                     <Text style={Styles.category}>Category : {category}</Text>

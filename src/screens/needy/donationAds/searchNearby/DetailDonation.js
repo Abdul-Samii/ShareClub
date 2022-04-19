@@ -7,7 +7,7 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants'
 import { BookedAds, CancelDonation } from '../../../../store/actions'
 
 const DetailDonation=(props)=>{
-    const {desc,title,phone,address,donationId,type,user,adID} = props.route.params
+    const {desc,title,phone,address,donationId,type,user,adID,img} = props.route.params
 
     const handleBookAd=async()=>{
         const userId=await AsyncStorage.getItem('userId')
@@ -30,7 +30,7 @@ const DetailDonation=(props)=>{
     return(
         <View>
             <Image
-                source={IMAGES.dashboard2}
+                source={{uri:img}}
                 style={Styles.img}
                 resizeMode="cover"
             />

@@ -74,7 +74,7 @@ console.log("0000000000000 ",pickerListCategory)
             const obj={
                 title:Title,
                 description:Desc,
-                // images:image,
+                images:image,
                 phone:Phone,
                 city:City,
                 country:Country,

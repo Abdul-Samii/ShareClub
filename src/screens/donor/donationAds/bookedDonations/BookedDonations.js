@@ -34,6 +34,7 @@ const BookedDonations = (props) =>{
                 phone:item.phone,
                 address:item.address,
                 donationId:item._id,
+                img:item.images[0],
                 type:'booked',
                 user:'donor'
             })}>

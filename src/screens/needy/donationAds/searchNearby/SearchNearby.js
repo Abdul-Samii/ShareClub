@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
-import React, { useEffect } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native'
+import React, { useEffect,useState } from 'react'
+import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList, RefreshControl} from 'react-native'
 import { connect } from 'react-redux'
 import { Card3 } from '../../..'
 import { Header } from '../../../../components'
@@ -12,7 +12,7 @@ import Wait from '../../../../components/layout/Wait'
 
 const SearchNearby = (props) =>{
    
-    
+    const [refresh,setRefresh] = useState(false)
         
 
     const getDonationAds = async()=>{
@@ -27,7 +27,7 @@ const SearchNearby = (props) =>{
     },[5])
 
     const handleFlatList = (item) =>{
-        console.log("___________>>> ",props.route)
+        console.log("___________>>> ",props.donationAds)
         if(props.route.params)
         {
             if(props.route.params.category == item.category.name)
@@ -49,21 +49,30 @@ const SearchNearby = (props) =>{
         }
         else{
         return(
-            <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
+           item.isAvailible&&( <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
                 title:item.title,
                 desc:item.description,
                 phone:item.phone,
                 address:item.address,
                 donationId:item._id,
+                img:item.images[0],
                 type:'search'
             })} style={Styles.card}>
                 <Card3 name={item.title} category={item.category.name} address={item.address} 
                 img={item.images[0]} time={item.createdAt}/>
-            </TouchableOpacity>
+            </TouchableOpacity>)
         )
         }
 
     
+    }
+
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+      }
+    const handleRefresh=()=>{
+        setRefresh(true);
+    wait(2000).then(() => setRefresh(false));
     }
 
     return(
@@ -85,9 +94,12 @@ const SearchNearby = (props) =>{
             ):(
             <FlatList   
                 data={props.donationAds}
-                keyExtractor={(item)=>item.name}  
+                keyExtractor={(item)=>Math.random()}  
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
+                refreshControl={
+                    <RefreshControl refreshing={refresh} onRefresh={handleRefresh}/>
+                }
             />
             )
             
