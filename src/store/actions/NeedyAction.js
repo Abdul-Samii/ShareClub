@@ -107,6 +107,27 @@ export const BookedAds = (data) => async dispatch=>{
   }
 }
 
+//Complete Donation
+export const CompleteDonation = (data) => async dispatch=>{
+  var response;
+  try{
+      dispatch({type:types.COMPLETE_DONATION_START});
+      let queryData = qs.stringify(data)
+
+       response = await httpRequest.post('needy/completedonation',queryData);
+      const result = response.data;
+      dispatch({type:types.COMPLETE_DONATION_SUCCESS,payload:result});
+      msg = result.msg
+      NotifyMessage(msg)
+  }
+  catch(err)
+  {
+    console.log("Something went wrong ----------------- ",err);
+    NotifyMessage(response.data.result.msg)
+    dispatch({type:types.COMPLETE_DONATION_FAILED,payload:response.data});
+  }
+}
+
 //Cancel Donation
 export const CancelDonation = (data) => async dispatch=>{
   var response;

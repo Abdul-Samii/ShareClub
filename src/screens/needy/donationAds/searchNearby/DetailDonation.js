@@ -7,7 +7,7 @@ import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants'
 import { BookedAds, CancelDonation } from '../../../../store/actions'
 
 const DetailDonation=(props)=>{
-    const {desc,title,phone,address,donationId,type,user} = props.route.params
+    const {desc,title,phone,address,donationId,type,user,adID} = props.route.params
 
     const handleBookAd=async()=>{
         const userId=await AsyncStorage.getItem('userId')
@@ -53,6 +53,7 @@ const DetailDonation=(props)=>{
                     title="Generate QR Code" 
                     btnStyle={Styles.btn}
                     btnTextStyle={Styles.btnText}
+                    onPress={()=>props.navigation.navigate('generateqr',{adID:adID})}
                     />
                     :
                         type==="search"?
@@ -63,12 +64,20 @@ const DetailDonation=(props)=>{
                         onPress={()=>handleBookAd()}
                         />
                         :
+                        <>
                         <Button 
-                        title="Cancel" 
+                        title="Scan to Complete" 
                         btnStyle={Styles.btn}
                         btnTextStyle={Styles.btnText}
+                        onPress={()=>props.navigation.navigate('scanqr')}
+                        />
+                        <Button 
+                        title="Cancel" 
+                        btnStyle={{...Styles.btn,marginTop:hp(0.5),backgroundColor:'transparent',borderWidth:1,borderColor:COLORS.red1}}
+                        btnTextStyle={{...Styles.btnText,color:COLORS.red1}}
                         onPress={()=>handleCancelDonation()}
-                    />
+                        />
+                        </>
                 }
             </View>
         </View>

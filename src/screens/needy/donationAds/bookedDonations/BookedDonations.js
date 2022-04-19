@@ -60,7 +60,7 @@ const BookedDonations = (props) =>{
             <Searchbar style={Styles.searchbar}/>
 
             <FlatList
-                data={props.donationAds.currentAds}
+                data={props.donationAds.bookedAds}
                 keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
@@ -71,6 +71,7 @@ const BookedDonations = (props) =>{
 }
 
 const mapStateToProps=props=>{
+    console.log()
     return{
         donationAds:props.needy.donationAds,
         msg:props.needy.msg

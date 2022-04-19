@@ -9,7 +9,7 @@ import Wait from '../../../../components/layout/Wait';
 import { COLORS, hp, ICONS, IMAGES, wp } from '../../../../constants';
 import { ViewDonorBookedAds } from '../../../../store/actions';
 
-const BookedDonations = (props) =>{
+const CompletedDonorDonations = (props) =>{
 
     const getBookedAds = async()=>{
         const userId = await AsyncStorage.getItem('userId');
@@ -27,16 +27,7 @@ const BookedDonations = (props) =>{
 
     const handleFlatList=(item)=>{
             return(
-            <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
-                title:item.title,
-                adID:item._id,
-                desc:item.description,
-                phone:item.phone,
-                address:item.address,
-                donationId:item._id,
-                type:'booked',
-                user:'donor'
-            })}>
+            
             <View style={Styles.item}>
                 <View style={Styles.elevation}><Image source={{uri:item.images[0]}} style={Styles.img}/></View> 
                 <View style={Styles.ItemBack}>
@@ -53,11 +44,10 @@ const BookedDonations = (props) =>{
                     </View>
                 </View>
             </View>
-            </TouchableOpacity>
         )
     
     }
-
+console.log("YOOOOOOOOOOOOOOOOOO ",props.donationAds)
     return(
         <>
         {props.isLoading?<Wait/>:
@@ -80,12 +70,12 @@ const BookedDonations = (props) =>{
 
 const mapStateToProps=props=>{
     return{
-        donationAds:props.donor.donationAds.bookedAds,
+        donationAds:props.donor.donationAds.completedAds,
         msg:props.needy.msg,
         isLoading:props.donor.isLoad
     }
 }
-export default connect(mapStateToProps,{ViewDonorBookedAds})(BookedDonations)
+export default connect(mapStateToProps,{ViewDonorBookedAds})(CompletedDonorDonations)
 
 const Styles = StyleSheet.create({
     container:{

@@ -21,7 +21,7 @@ const ManageDonations = ({navigation}) =>{
                 </TouchableOpacity>
 
 
-                <Card2 img={IMAGES.speaker} text="Search Donations in Notifications"/>
+                <Card2 img={IMAGES.speaker} text="Completed Donations"/>
             </View>
         </ScrollView>
     )

@@ -20,8 +20,9 @@ const ManageDonorDonations = ({navigation}) =>{
                     <Card2 img={IMAGES.hand} text="Booked Donations" />
                 </TouchableOpacity>
 
-
-                <Card2 img={IMAGES.speaker} text="Donations Completed"/>
+                <TouchableOpacity onPress={()=>navigation.navigate('completeddonordonations')}>
+                    <Card2 img={IMAGES.speaker} text="Donations Completed"/>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

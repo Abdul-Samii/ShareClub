@@ -1,6 +1,7 @@
-import {AddDonation, Address, BookedDonations, BookedDonorDonations, ChangeName, ChangePassword, ChatHome, DetailDonation, Donor, DonorSignup, ForgotPassword, 
+import {AddDonation, Address, BookedDonations, BookedDonorDonations, ChangeName, ChangePassword, ChatHome, CompletedDonorDonations, DetailDonation, Donor, DonorSignup, ForgotPassword, 
+  GenerateQR, 
   Help, Login, Logout, ManageDonations, ManageDonorDonations, Needy,NeedyDashboard, NeedyProfile, NeedySignup, 
-  NewPassword, Notification, ResetCode, SearchNearby, Settings, Signup} from '../../screens'
+  NewPassword, Notification, ResetCode, ScanQR, SearchNearby, Settings, Signup} from '../../screens'
 // export const initialRouteName = 'splash';
 // export const initialRouteName = 'login';  //for sample test right now I set the initialRoute to login
 
@@ -34,6 +35,7 @@ export const RouteList = [
   {name:'searchnearby',component:SearchNearby},
   {name:'bookeddonations',component:BookedDonations},
   {name:'detaildonation',component:DetailDonation},
+  {name:'scanqr',component:ScanQR},
 
   {name:'changepassword',component:ChangePassword},
   {name:'changename',component:ChangeName},
@@ -47,7 +49,9 @@ export const RouteList = [
   {name:'donor',component:Donor},
   {name:'managedonordonations',component:ManageDonorDonations},
   {name:'adddonation',component:AddDonation},
+  {name:'completeddonordonations',component:CompletedDonorDonations},
   {name:'bookeddonordonations',component:BookedDonorDonations},
-    
+  {name:'generateqr',component:GenerateQR},
+  
   
 ];

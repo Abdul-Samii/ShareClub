@@ -81,7 +81,7 @@ export const GetAllCategories = (data) => async dispatch=>{
 export const ViewDonorBookedAds = (data) => async dispatch=>{
   var response;
   try{
-      dispatch({type:types.VIEW_BOOKEDADS_START});
+      dispatch({type:types.VIEW_BOOKED_DONOR_ADS_START});
       let queryData = qs.stringify(data)
       console.log("Testing pass ",data)
 
@@ -91,11 +91,11 @@ export const ViewDonorBookedAds = (data) => async dispatch=>{
         }
       });
       const result = response.data;
-      dispatch({type:types.VIEW_BOOKEDADS_SUCCESS,payload:result});
+      dispatch({type:types.VIEW_BOOKED_DONOR_ADS_SUCCESS,payload:result});
   }
   catch(err)
   {
     console.log("Something went wrong ----------------- ",err);
-    dispatch({type:types.VIEW_BOOKEDADS_FAILED,payload:response.data});
+    dispatch({type:types.VIEW_BOOKED_DONOR_ADS_FAILED,payload:response.data});
   }
 }

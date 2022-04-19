@@ -46,7 +46,12 @@ export const NeedyReducer = (state=initialState,{type,payload})=>{
             return {...state, isLoading:false}
 
             
-        
+        case types.COMPLETE_DONATION_START:
+            return {...state, isLoading:true}
+        case types.COMPLETE_DONATION_SUCCESS:
+            return {...state,isLoading:false,msg:payload.msg}
+        case types.COMPLETE_DONATION_FAILED:
+            return {...state, isLoading:false}
         
 
 
