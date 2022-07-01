@@ -73,7 +73,7 @@ const mapStateToProps=props=>{
     return{
         donationAds:props.needy.donationAds.completedAds,
         msg:props.needy.msg,
-        isLoading:props.donor.isLoad
+        isLoading:props.needy.isLoad
     }
 }
 export default connect(mapStateToProps,{ViewBookedAds})(CompletedNeedyDonations)

@@ -32,8 +32,8 @@ const NeedyProfile=(props)=>{
         setName(props.needy.name)
         setCell(props.needy.phone)
         setEmail(props.needy.email)
-        setDonationAccepted(props.needy.acceptedAds?props.needy.acceptedAds.length:"Loading...")
-        setDonationPending(props.needy.currentAds?props.needy.currentAds.length:"Loading...")
+        setDonationAccepted(props.needy.completedAds?props.needy.completedAds.length:"Loading...")
+        setDonationPending(props.needy.bookedAds?props.needy.bookedAds.length:"Loading...")
         setDP(props.needy.pic)
     }
     const getNeedyData=async()=>{
@@ -58,7 +58,7 @@ const NeedyProfile=(props)=>{
             <View 
                 style={{
                     borderBottomWidth:0.5,
-                    opacity:0.1
+                    opacity:0.1 
                 }}
             />
             <TouchableOpacity style={Styles.flex} onPress={()=>props.navigation.navigate(item.nav)}>

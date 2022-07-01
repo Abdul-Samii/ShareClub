@@ -12,7 +12,7 @@ export const NeedyReducer = (state=initialState,{type,payload})=>{
         case types.GET_NEEDY_START:
             return {...state, isLoading:true}
         case types.GET_NEEDY_SUCCESS:
-            return {...state, needyProfile:payload}
+            return {...state,isLoading:false, needyProfile:payload}
         case types.GET_NEEDY_FAILED:
             return {...state, isLoading:false}
         

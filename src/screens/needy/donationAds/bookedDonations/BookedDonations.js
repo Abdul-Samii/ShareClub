@@ -24,6 +24,7 @@ const BookedDonations = (props) =>{
 
 
     const handleFlatList=(item)=>{
+        console.log("Here test --> ",item)
             return(
             <TouchableOpacity onPress={()=>props.navigation.navigate('detaildonation',{
                 title:item.title,

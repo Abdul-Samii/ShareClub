@@ -22,7 +22,7 @@ export const GetDonor = (data) => async dispatch=>{
     try{
         dispatch({type:types.GET_DONOR_START});
         let queryData = qs.stringify(data);
-        const response = await httpRequest.post('/donor/getdonor',queryData);
+        const response = await httpRequest.post('/donor/getdonor',{params:{queryData}});
         const result = response.data;
         console.log("*********jjj*** ",result)
         dispatch({type:types.GET_DONOR_SUCCESS,payload:result});

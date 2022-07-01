@@ -9,9 +9,8 @@ import { Card1 } from '../..'
 import { connect } from 'react-redux'
 import { ViewBookedAds } from '../../../store/actions'
 import AsyncStorage from '@react-native-community/async-storage'
+import Wait from '../../../components/layout/Wait'
 const NeedyDashboard = (props) =>{
-
-
     const categories=[
         {categoryName:"Food",categoryIcon:"food"},
         {categoryName:"Clothes",categoryIcon:"tshirt-crew"},
@@ -36,12 +35,14 @@ const NeedyDashboard = (props) =>{
     }
     useEffect(()=>{
         getBookedAds()
-    },[])
+    },[8])
 
     const handleFuck=()=>{
         props.navigation.navigate('bookeddonations')
     }
     return(
+        <>
+        {props.isLoading?<Wait/>:
         <ScrollView>
             <Header title="ShareClub" iconName="menu" iconRight="bell"/>
             <TextInput placeholder='Search...' style={Styles.search}/>
@@ -65,18 +66,7 @@ const NeedyDashboard = (props) =>{
                 </Card>
             </View>
 
-            {/* <ScrollView horizontal={true} scrollEnabled={categoriesScroll} showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}}> */}
-
-        {/* {
-            categories.map((item,index)=>{
-                return(
-                <Categories key={Math.random()} count={index} navigation={props.navigation} 
-                categoryName={item.categoryName} categoryIcon={item.categoryIcon} 
-                categoriesScroll={expandCategories} categoriesLength={categories.length}
-                />
-                )
-            })
-        } */}
+           
         <Categories categories={categories} navigation={props.navigation}/>
         {/* </ScrollView> */}
 
@@ -91,10 +81,21 @@ const NeedyDashboard = (props) =>{
 
     number="10"/>
     <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number="10"/>
-    <Card1 img={IMAGES.dashboard3} cardText="Donations Rejected" number={10}/>        
+    <Card1 img={IMAGES.dashboard3} cardText="Donations Completed" number={10}/>        
+
+
+    {/* <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" 
+    onPress={()=>handleFuck()} number={props.donationAds?props.donationAds.bookedAds.length:"..."}/>
+    
+    <Card1 img={IMAGES.dashboard3} cardText="Completed Donations" 
+    onPress={()=>props.navigation.navigate('completedneedydonations')} number={props.donationAds?props.donationAds.completedAds.length:"..."}/>         */}
+
 
 
     </ScrollView>
+    
+    }
+    </>
     )
 }
 
@@ -102,7 +103,8 @@ const NeedyDashboard = (props) =>{
 const mapStateToProps=props=>{
     return{
         donationAds:props.needy.donationAds,
-        msg:props.needy.msg
+        msg:props.needy.msg,
+        isLoading:props.needy.isLoading
     }
 }
 export default connect(mapStateToProps,{ViewBookedAds})(NeedyDashboard)

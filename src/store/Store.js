@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { createStore,applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { authReducer, DonorReducer, NeedyReducer, UpdatesReducer } from "./reducers";
+import { authReducer, DonationReducer, DonorReducer, NeedyReducer, UpdatesReducer } from "./reducers";
 
 
 export const Store = createStore(
@@ -9,7 +9,8 @@ export const Store = createStore(
         auth:authReducer,
         needy:NeedyReducer,
         donor:DonorReducer,
-        update:UpdatesReducer
+        update:UpdatesReducer,
+        donations:DonationReducer,
     }),
     {},
     applyMiddleware(thunk)

@@ -27,7 +27,7 @@ const SearchNearby = (props) =>{
     },[5])
 
     const handleFlatList = (item) =>{
-        console.log("___________>>> ",props.donationAds)
+        console.log("___________>>> ",item)
         if(props.route.params)
         {
             if(props.route.params.category == item.category.name)

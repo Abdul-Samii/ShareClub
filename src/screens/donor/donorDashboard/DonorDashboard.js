@@ -7,24 +7,13 @@ import { Button } from '../../../components/form'
 import { Categories, Statistics, TTabs } from './components'
 import { Card1 } from '../..'
 import { connect } from 'react-redux'
-import { ViewBookedAds } from '../../../store/actions'
+import { ViewDonorBookedAds } from '../../../store/actions'
 import AsyncStorage from '@react-native-community/async-storage'
 const DonorDashboard = (props) =>{
 
 
-    const categories=[
-        {categoryName:"Food",categoryIcon:"food"},
-        {categoryName:"Clothes",categoryIcon:"tshirt-crew"},
-        {categoryName:"Shoes",categoryIcon:"shoe-formal"},
-        {categoryName:"yo",categoryIcon:"shoe-formal"},
-        {categoryName:"jo",categoryIcon:"shoe-formal"}
-    ]
-
-    // const [categoriesScroll,setCategoriesScroll] = useState(false)
-
-    const expandCategories=()=>{
-        setCategoriesScroll(!categoriesScroll);
-    }
+    
+    console.log("O ",props.donationAds)
 
 
     const getBookedAds = async()=>{
@@ -32,14 +21,14 @@ const DonorDashboard = (props) =>{
         const obj = {
             userId
         }
-        await props.ViewBookedAds(userId)
+        await props.ViewDonorBookedAds(userId)
     }
     useEffect(()=>{
         getBookedAds()
     },[])
 
     const handleFuck=()=>{
-        props.navigation.navigate('bookeddonations')
+        props.navigation.navigate('bookeddonordonations')
     }
     return(
         <ScrollView>
@@ -51,13 +40,13 @@ const DonorDashboard = (props) =>{
                     <View style={{flexDirection:'row'}}>
                         <View>
                             <Title style={{color:'white'}}>Start Now</Title>
-                            <Paragraph style={{color:'white'}}>Search new donation..</Paragraph>
+                            <Paragraph style={{color:'white'}}>Add new donation..</Paragraph>
                         </View>
                         <View>
                             <Button title="Start Now"
                                 btnStyle={Styles.btnTop}
                                 btnTextStyle={{color:'black'}}
-                                onPress={()=>props.navigation.navigate('searchnearby')}
+                                onPress={()=>props.navigation.navigate('adddonation')}
                             />
                         </View>
                     </View>
@@ -65,33 +54,30 @@ const DonorDashboard = (props) =>{
                 </Card>
             </View>
 
-            {/* <ScrollView horizontal={true} scrollEnabled={categoriesScroll} showsHorizontalScrollIndicator={false} style={{flexDirection:'row'}}> */}
-
-        {/* {
-            categories.map((item,index)=>{
-                return(
-                <Categories key={Math.random()} count={index} navigation={props.navigation} 
-                categoryName={item.categoryName} categoryIcon={item.categoryIcon} 
-                categoriesScroll={expandCategories} categoriesLength={categories.length}
-                />
-                )
-            })
-        } */}
-        <Categories categories={categories}/>
-        {/* </ScrollView> */}
+           
 
     <Text style={{fontWeight:"bold",fontSize:16, color:'black', marginLeft:wp(5),marginTop:hp(2)}}>
         Statistics
     </Text>
 
         
-    
-    <Card1 img={IMAGES.dashboard1} cardText="Booked Donations" 
-    onPress={()=>handleFuck()}
 
-    number="10"/>
-    <Card1 img={IMAGES.dashboard2} cardText="Donations Accepted" number="10"/>
-    <Card1 img={IMAGES.dashboard3} cardText="Donations Rejected" number={10}/>        
+    <Card1 img={IMAGES.dashboard1} cardText="Active Donations" 
+    onPress={()=>handleFuck()} number={10}/>
+    <Card1 img={IMAGES.dashboard2} cardText="Booked Donations" 
+    onPress={()=>props.navigation.navigate('bookeddonordonations')} number={10}/>
+    <Card1 img={IMAGES.dashboard3} cardText="Completed Donations" 
+    onPress={()=>props.navigation.navigate('completeddonordonations')} number={10}/>        
+
+
+
+    
+    {/* <Card1 img={IMAGES.dashboard1} cardText="Active Donations" 
+    onPress={()=>handleFuck()} number={props.donationAds?props.donationAds.activeAds.length:"..."}/>
+    <Card1 img={IMAGES.dashboard2} cardText="Booked Donations" 
+    onPress={()=>props.navigation.navigate('bookeddonordonations')} number={props.donationAds?props.donationAds.bookedAds.length:"..."}/>
+    <Card1 img={IMAGES.dashboard3} cardText="Completed Donations" 
+    onPress={()=>props.navigation.navigate('completeddonordonations')} number={props.donationAds?props.donationAds.completedAds.length:"..."}/>         */}
 
 
     </ScrollView>
@@ -101,11 +87,11 @@ const DonorDashboard = (props) =>{
 
 const mapStateToProps=props=>{
     return{
-        donationAds:props.needy.donationAds,
-        msg:props.needy.msg
+        donationAds:props.donor.donationAds,
+        msg:props.donor.msg
     }
 }
-export default connect(mapStateToProps,{ViewBookedAds})(DonorDashboard)
+export default connect(mapStateToProps,{ViewDonorBookedAds})(DonorDashboard)
 
 
 const Styles = StyleSheet.create({

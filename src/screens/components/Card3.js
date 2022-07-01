@@ -13,7 +13,7 @@ const Card3 = ({name, category, address, time, img}) =>{
                     <Text style={Styles.address}>Address : {address}</Text>
                 </View>
                 <View style={Styles.timeIcon}>
-                    <Text style={Styles.time}>{time}</Text>
+                    {/* <Text style={Styles.time}>{time}</Text> */}
                     <ICONS.AntDesign name="rightcircleo" size={20} color={COLORS.red2} style={Styles.icon}/>
                 </View>
             </View>

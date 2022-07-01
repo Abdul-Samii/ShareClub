@@ -1,24 +1,39 @@
-import React,{useState} from 'react'
+import AsyncStorage from '@react-native-community/async-storage'
+import React,{useEffect, useState} from 'react'
 import {View, Text, StyleSheet,TouchableOpacity, Image,ScrollView,FlatList, Touchable, TextInput} from 'react-native'
+import { connect } from 'react-redux'
 import { Header } from '../../components'
 import { hp, ICONS, IMAGES, wp } from '../../constants'
+import { GetDonationsMsg } from '../../store/actions'
 
-const ChatHome=()=>{
+const ChatHome=(props)=>{
 
     const [search,setSearch] = useState(false)
+    const [Type,setType] = useState()
 
-    const users = [
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user},
-            {name:'sami',img:IMAGES.user}, 
-               ]
+
+
+
+
+
+
+
+
+
+
+    
+    const getDonationsMsg=async()=>{
+        userId = await AsyncStorage.getItem('userId')
+        const type = await AsyncStorage.getItem('type');
+        setType(type)
+        const obj={ type, userId }
+        await props.GetDonationsMsg(obj)
+    }
+
+    useEffect(()=>{
+        getDonationsMsg()
+    },[])
+
 
         const chat=[
             {name:'Abdul Sami', img:IMAGES.user,msg:'Hi! How are you doing?',time:'2MINS AGO',new:2},
@@ -35,12 +50,12 @@ const ChatHome=()=>{
     const handleFlatList=(item)=>{
         return(
             <>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>props.navigation.navigate('chatscreen',{recieverId:Type=='needy'?item.owner._id:item.needy._id})}>
                 <View style={Styles.chat}>
-                    <Image source={IMAGES.user} style={Styles.userImg}/>
+                    <Image source={{uri:Type=='needy'?item.owner.pic:item.needy.pic}} style={Styles.userImg}/>
                     <View style={Styles.nameMsg}>
-                        <Text style={Styles.name}>{item.name}</Text>
-                        <Text>{item.msg}</Text>
+                        <Text style={Styles.name}>{Type=='needy'?item.owner.name:item.needy.name}</Text>
+                        <Text>Click to View Chat</Text>
                     </View>
                     <View style={Styles.timeNumber}>
                         <Text style={Styles.time}>{item.time}</Text>
@@ -72,33 +87,52 @@ const ChatHome=()=>{
 
         <Text style={Styles.userHeading}>Users</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={Styles.userScrollView}>
-            {users.map(()=>{
+            {props.donationsMsg.map((item,index)=>{
+                console.log("IOIIOIOIOIOI ",item.needy)
                 return(
                     <TouchableOpacity key={Math.random()}>
                         <View  style={Styles.oneUser}>
-                        <Image source={IMAGES.user} style={Styles.userImg}/>
-                        <Text style={Styles.userName}>Sami</Text>
+                        <Image source={{uri:Type=='needy'?item.owner.pic:item.needy.pic}} style={Styles.userImg}/>
+                        <Text style={Styles.userName}>{Type=='needy'?item.owner.name:item.needy.name}</Text>
                         </View>
                      </TouchableOpacity>
                 )
             })}  
+             
         </ScrollView>
         
         {/* END */}
 
-    
-        
+    <View style={Styles.chats}>
+        <Text style={{...Styles.userHeading,marginTop:hp(-70)}}>Chats</Text>
             <FlatList
-                data={chat}
+                data={props.donationsMsg}
                 keyExtractor={(item)=>Math.random()}
                 renderItem={(data)=>handleFlatList(data.item)}
                 showsVerticalScrollIndicator={false}
             />
+    </View>
 
         </View>
     )
 }
-export default ChatHome
+
+
+const mapStateToProps=props=>{
+    console.log("POPOOOOOOOOOOOOOOO ",props.donations.donationsMsg)
+    return{
+        isLoading:props.auth.isLoading,
+        donationsMsg:props.donations.donationsMsg
+    }
+  }
+  
+  export default connect(mapStateToProps,{GetDonationsMsg})(ChatHome)
+
+
+
+
+
+
 const Styles = StyleSheet.create({
     container:{
         marginHorizontal:wp(5),
